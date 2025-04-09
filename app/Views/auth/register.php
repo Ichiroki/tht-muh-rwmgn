@@ -13,26 +13,48 @@
     <body class="align">
 
         <div class="grid">
-            <form action="/login" method="POST" class="form login">
+            <form action="/register" method="POST" class="form login">
                 <div class="form__field">
-                    <label for="login__username"><svg class="icon">
+                    <label for="first_name"><svg class="icon">
                         <use xlink:href="#icon-user"></use>
-                    </svg><span class="hidden">Username</span></label>
-                    <input autocomplete="email" id="login__username" type="text" name="email" class="form__input" placeholder="Email" required>
+                    </svg><span class="hidden">First Name</span></label>
+                    <input autocomplete="first_name" id="first_name" type="text" name="first_name" class="form__input" placeholder="First Name" required>
                 </div>
 
                 <div class="form__field">
-                    <label for="login__password"><svg class="icon">
+                    <label for="last_name"><svg class="icon">
+                        <use xlink:href="#icon-user"></use>
+                    </svg><span class="hidden">Last Name</span></label>
+                    <input autocomplete="last_name" id="last_name" type="text" name="last_name" class="form__input" placeholder="Last Name" required>
+                </div>
+
+                <div class="form__field">
+                    <label for="email"><svg class="icon">
+                        <use xlink:href="#icon-user"></use>
+                    </svg><span class="hidden">Email</span></label>
+                    <input autocomplete="email" id="email" type="text" name="email" class="form__input" placeholder="Email" required>
+                </div>
+
+                <div class="form__field">
+                    <label for="password"><svg class="icon">
                         <use xlink:href="#icon-lock"></use>
                     </svg><span class="hidden">Password</span></label>
-                    <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+                    <input id="password" type="password" name="password" class="form__input" placeholder="Password" required>
+                </div>
+
+                <div class="form__field">
+                    <label for="confirm_password"><svg class="icon">
+                        <use xlink:href="#icon-lock"></use>
+                    </svg><span class="hidden">Confirm Password</span></label>
+                    <input id="confirm_password" type="password" name="confirm_password" class="form__input" placeholder="Confirm Password" required>
                 </div>
 
                 <div class="form__field">
                     <input type="submit" value="Sign In">
                 </div>
             </form>
-            <p class="text--center">Not a member? <a href="/register">Sign up now</a> <svg class="icon">
+
+            <p class="text--center">Already Registered ? <a href="/login">Sign in now</a> <svg class="icon">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg></p>
         </div>

@@ -8,4 +8,19 @@ class Authentication extends BaseController
     {
         return view('auth/login');
     }
+
+    public function register(): string
+    {
+        return view('auth/register');
+    }
+
+    public function loginSystem()
+    {
+        
+    }
+
+    public function registerSystem()
+    {
+
+    }
 }
