@@ -14,6 +14,7 @@
 
         <div class="grid">
             <form action="/register" method="POST" class="form login">
+                <?= csrf_field() ?>
                 <div class="form__field">
                     <label for="first_name"><svg class="icon">
                         <use xlink:href="#icon-user"></use>

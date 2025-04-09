@@ -27,6 +27,8 @@ class Filters extends BaseFilters
     public array $aliases = [
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
+        'auth'          => \App\Filters\AuthCheck::class,
+        'guest'          => \App\Filters\AlreadyLoggedIn::class,
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
@@ -69,8 +71,8 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
+            'honeypot',
+            'csrf',
             // 'invalidchars',
         ],
         'after' => [
