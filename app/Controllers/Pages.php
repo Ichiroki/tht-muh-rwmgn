@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
+class Pages extends BaseController
 {
     public function dashboard() 
     {
