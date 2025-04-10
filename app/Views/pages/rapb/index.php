@@ -26,6 +26,7 @@
     </div>
 
     <main class="content">
+        <a href="/rapb/create" class="btn btn-green">Buat RAPB Baru</a>
         <?php if(empty($data['rapb'])) : ?>
             <p>Tidak ada data yang ditemukan.</p>
         <?php else :?>

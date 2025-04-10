@@ -23,5 +23,8 @@ $routes->group('/', ['filter' => 'auth'], function($routes) {
 
     $routes->group('/rapb', function($routes) {
         $routes->get('/', 'RAPB::index');
+        
+        $routes->get('create', 'RAPB::create');
+        $routes->post('create', 'RAPB::store');
     });
 });

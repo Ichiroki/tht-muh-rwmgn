@@ -14,4 +14,14 @@ class RAPB extends BaseController
         $data['rapb'] = $rapbModel->findAll();
         return view('pages/rapb/index.php', $data);
     }
+
+    public function create()
+    {
+        return view('pages/rapb/create.php');
+    }
+
+    public function store() 
+    {
+        
+    }
 }
