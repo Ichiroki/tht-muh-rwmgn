@@ -27,11 +27,28 @@
 
     <main class="content">
         <a href="/rapb/create" class="btn btn-green">Buat RAPB Baru</a>
-        <?php if(empty($data['rapb'])) : ?>
-            <p>Tidak ada data yang ditemukan.</p>
-        <?php else :?>
-            <p>Ada data yang ditemukan</p>
-        <?php endif?>
+        <table class="rwd-table">
+            <tr>
+                <th>No</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Gross</th>
+            </tr>
+            <?php if(empty($rapb)) : ?>
+                <p>Tidak ada data yang ditemukan.</p>
+            <?php else :?>
+                <?php $no = 1; ?>
+                <?php foreach ($rapb as $r) : ?>
+                <tr>
+                    <td data-th="Movie Title"><?= $no++ ?></td>
+                    <td data-th="Genre"><?= esc($r['nama_kegiatan']) ?></td>
+                    <td data-th="Year"><?= esc($r['kategori']) ?></td>
+                    <td data-th="Gross"><?= number_format($r['anggaran'], 0, ',', '.') ?></td>
+                    <td data-th="Gross"><?= esc($r['tahun']) ?></td>
+                </tr>
+            <?php endforeach ?>
+            <?php endif ?>
+        </table>
     </main>
 
     <script src="/js/app.js"></script>

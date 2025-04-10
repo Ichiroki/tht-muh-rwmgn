@@ -12,11 +12,6 @@ class RapbMigration extends Migration
             'id' => [
                 'type' => 'CHAR',
                 'constraint' => 36,
-                'null' => false,
-            ],
-            'kode' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
             ],
             'nama_kegiatan' => [
                 'type' => 'VARCHAR',
@@ -32,6 +27,10 @@ class RapbMigration extends Migration
             ],
             'tahun' => [
                 'type' => 'INT',
+            ],
+            'deskripsi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1000
             ],
             'created_at' => [
                 'type' => 'DATETIME',

@@ -39,6 +39,7 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "migrate:fresh": "php spark migrate:rollback -f && php spark migrate"
     }
 }

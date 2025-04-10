@@ -32,7 +32,7 @@ class Authentication extends BaseController
                     'user_email' => $user['email'],
                     'logged_in' => true
                 ]);
-                return redirect()->to('/dashboard');
+                return redirect()->to('/');
             } else {
                 return redirect()->back()->with('error', 'Password salah');
             }

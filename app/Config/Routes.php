@@ -18,8 +18,8 @@ $routes->group('/', ['filter' => 'guest'], function($routes) {
     });
 });
 
-$routes->group('/', ['filter' => 'auth'], function($routes) {
-    $routes->get('/dashboard', 'Pages::dashboard');
+$routes->group('', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'Pages::dashboard');
 
     $routes->group('/rapb', function($routes) {
         $routes->get('/', 'RAPB::index');

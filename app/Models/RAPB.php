@@ -8,20 +8,14 @@ class RAPB extends Model
 {
     protected $table            = 'rapb_master';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['kode', 'nama_kegiatan', 'kategori', 'anggaran', 'tahun'];
-
-    protected bool $allowEmptyInserts = false;
-    protected bool $updateOnlyChanged = true;
-
-    protected array $casts = [];
-    protected array $castHandlers = [];
+    protected $useAutoIncrement = false;
+    protected $allowedFields    = ['id', 'nama_kegiatan', 'kategori', 'anggaran', 'tahun'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
