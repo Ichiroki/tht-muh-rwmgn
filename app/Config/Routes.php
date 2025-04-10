@@ -26,5 +26,8 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         
         $routes->get('create', 'RAPB::create');
         $routes->post('create', 'RAPB::store');
+
+        $routes->get('edit/(:segment)', 'RAPB::edit/$1');
+        $routes->post('edit/(:segment)', 'RAPB::update/$1');
     });
 });

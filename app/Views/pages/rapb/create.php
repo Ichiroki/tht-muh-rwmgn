@@ -32,10 +32,7 @@
                 <label for="email">
                     <span>Nama Kegiatan</span>
                 </label>
-                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" 
-                value="Demo Masak"
-                value="<?= old('nama_kegiatan') ?>" 
-                class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" value="<?= old('nama_kegiatan') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
             <div class="form__field">
                 <label for="kategori">
@@ -62,7 +59,7 @@
                 <label for="deskripsi">
                     <span>Deskripsi</span>
                 </label>
-                <textarea id="deskripsi" type="text" name="deskripsi" value="<?= old('deskripsi') ?>" class="form__input" rows="15" col="10" placeholder="Jelaskan maksud dari kegiatan ini" required></textarea>
+                <textarea id="deskripsi" type="text" name="deskripsi" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('deskripsi')) ?></textarea>
             </div>
 
             <div class="form__field">

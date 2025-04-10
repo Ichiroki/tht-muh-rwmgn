@@ -390,6 +390,7 @@ a {
 
 .btn {
     display: block;
+    outline: none;
     text-decoration: none;
     width: fit-content;
     padding: 10px;
@@ -399,7 +400,15 @@ a {
         background-color: green;
     }
 
-    &.btn-info {
+    &.btn-blue {
+        background-color: blue;
+    }
+
+    &.btn-yellow {
+        background-color: blue;
+    }
+
+    &.btn-red {
         background-color: blue;
     }
 }

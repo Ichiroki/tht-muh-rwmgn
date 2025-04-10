@@ -12,7 +12,7 @@ class RAPB extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $useAutoIncrement = false;
-    protected $allowedFields    = ['id', 'nama_kegiatan', 'kategori', 'anggaran', 'tahun'];
+    protected $allowedFields    = ['id', 'nama_kegiatan', 'kategori', 'anggaran', 'tahun', 'deskripsi'];
 
     // Dates
     protected $useTimestamps = true;

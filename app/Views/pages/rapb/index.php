@@ -30,9 +30,11 @@
         <table class="rwd-table">
             <tr>
                 <th>No</th>
-                <th>Genre</th>
-                <th>Year</th>
-                <th>Gross</th>
+                <th>Nama Kegiata</th>
+                <th>Kategori</th>
+                <th>Anggaran</th>
+                <th>Tahun</th>
+                <th>Aksi</th>
             </tr>
             <?php if(empty($rapb)) : ?>
                 <p>Tidak ada data yang ditemukan.</p>
@@ -40,11 +42,14 @@
                 <?php $no = 1; ?>
                 <?php foreach ($rapb as $r) : ?>
                 <tr>
-                    <td data-th="Movie Title"><?= $no++ ?></td>
-                    <td data-th="Genre"><?= esc($r['nama_kegiatan']) ?></td>
-                    <td data-th="Year"><?= esc($r['kategori']) ?></td>
-                    <td data-th="Gross"><?= number_format($r['anggaran'], 0, ',', '.') ?></td>
-                    <td data-th="Gross"><?= esc($r['tahun']) ?></td>
+                    <td data-th="No"><?= $no++ ?></td>
+                    <td data-th="Nama Kegiatan"><?= esc($r['nama_kegiatan']) ?></td>
+                    <td data-th="Kategori"><?= esc($r['kategori']) ?></td>
+                    <td data-th="Anggaran"><?= number_format($r['anggaran'], 0, ',', '.') ?></td>
+                    <td data-th="Tahun"><?= esc($r['tahun']) ?></td>
+                    <td data-th="Aksi">
+                        <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
+                    </td>
                 </tr>
             <?php endforeach ?>
             <?php endif ?>
