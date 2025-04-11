@@ -28,12 +28,12 @@ class Cashflow extends BaseController
             $data['cashflow'] = $this->cashflowModel->where('unit_id', $unitId)->findAll();
         }
 
-        return view('cashflow/index', $data);
+        return view('pages/cashflow/index', $data);
     }
 
     public function create() 
     {
-        return view('cashflow/create');
+        return view('pages/cashflow/create');
     }
 
     public function store()
@@ -74,7 +74,7 @@ class Cashflow extends BaseController
     public function edit($id)
     {
         $data['cashflow'] = $this->cashflowModel->find($id);
-        return view('cashflow/edit', $data);
+        return view('pages/cashflow/edit', $data);
     }
 
     public function update($id)

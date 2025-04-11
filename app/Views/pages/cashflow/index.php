@@ -32,10 +32,11 @@
         <table class="rwd-table">
             <tr>
                 <th>No</th>
-                <th>Nama Kegiatan</th>
+                <th>Unit</th>
+                <th>RAPB</th>
+                <th>Tipe</th>
                 <th>Kategori</th>
-                <th>Anggaran</th>
-                <th>Tahun</th>
+                <th>Jumlah</th>
                 <th>Aksi</th>
             </tr>
             <?php if(empty($rapb)) : ?>

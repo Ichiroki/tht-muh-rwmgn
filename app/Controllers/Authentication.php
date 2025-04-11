@@ -30,6 +30,8 @@ class Authentication extends BaseController
                 $session->set([
                     'user_id' => $user['id'],
                     'user_email' => $user['email'],
+                    'role' => $user['role'],
+                    'unit_id' => $user['unit_id'],
                     'logged_in' => true
                 ]);
                 return redirect()->to('/');
