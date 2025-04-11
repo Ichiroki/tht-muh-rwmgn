@@ -30,7 +30,7 @@
         <table class="rwd-table">
             <tr>
                 <th>No</th>
-                <th>Nama Kegiata</th>
+                <th>Nama Kegiatan</th>
                 <th>Kategori</th>
                 <th>Anggaran</th>
                 <th>Tahun</th>
@@ -49,6 +49,11 @@
                     <td data-th="Tahun"><?= esc($r['tahun']) ?></td>
                     <td data-th="Aksi">
                         <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
+                        <form action="/rapb/delete/<?= $r['id'] ?>" method="POST">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-red">Delete</button>
+                        </form>
                     </td>
                 </tr>
             <?php endforeach ?>

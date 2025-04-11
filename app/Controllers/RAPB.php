@@ -94,4 +94,11 @@ class RAPB extends BaseController
 
         return redirect()->to('/rapb')->with('success', 'Data berhasil diperbarui');
     }
+
+    public function delete($id) {
+        $rapbModel = new RAPBModel();
+        $rapbModel->delete(['id' => $id]);
+
+        return redirect()->to('/rapb');
+    }
 }

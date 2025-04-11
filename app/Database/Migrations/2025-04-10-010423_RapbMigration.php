@@ -13,22 +13,22 @@ class RapbMigration extends Migration
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
-            'nama_kegiatan' => [
+            'activity_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'kategori' => [
+            'category' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
-            'anggaran' => [
+            'amount' => [
                 'type' => 'DECIMAL',
                 'constraint' => '15.2'
             ],
-            'tahun' => [
+            'year' => [
                 'type' => 'INT',
             ],
-            'deskripsi' => [
+            'description' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1000
             ],

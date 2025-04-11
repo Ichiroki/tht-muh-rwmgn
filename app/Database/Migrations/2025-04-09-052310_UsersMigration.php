@@ -32,9 +32,15 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255'
             ],
-            'confirm_password' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255'
+            'role' => [
+                'type' => 'ENUM',
+                'constraint' => ['admin', 'pcm', 'unit', 'bendahara'],
+                'default' => 'unit'
+            ],
+            'unit_id' => [
+                'type' => 'BIGINT',
+                'constraint' => 10,
+                'null' => true
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -45,7 +51,9 @@ class Users extends Migration
                 'null' => true
             ]
         ]);
+
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'SET NULL');
         $this->forge->createTable('users');
     }
 

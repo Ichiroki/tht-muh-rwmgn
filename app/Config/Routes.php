@@ -28,6 +28,8 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->post('create', 'RAPB::store');
 
         $routes->get('edit/(:segment)', 'RAPB::edit/$1');
-        $routes->post('edit/(:segment)', 'RAPB::update/$1');
+        $routes->patch('edit/(:segment)', 'RAPB::update/$1');
+
+        $routes->delete('delete/(:segment)', 'RAPB::delete/$1');
     });
 });

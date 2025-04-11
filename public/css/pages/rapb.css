@@ -394,7 +394,11 @@ a {
     text-decoration: none;
     width: fit-content;
     padding: 10px;
+    border: none;
     border-radius: 10px;
+    background-color: transparent;
+
+    cursor: pointer;
 
     &.btn-green {
         background-color: green;
@@ -405,10 +409,10 @@ a {
     }
 
     &.btn-yellow {
-        background-color: blue;
+        background-color: yellow;
     }
 
     &.btn-red {
-        background-color: blue;
+        background-color: red;
     }
 }

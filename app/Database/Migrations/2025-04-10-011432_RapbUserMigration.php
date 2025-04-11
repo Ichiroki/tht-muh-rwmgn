@@ -20,10 +20,14 @@ class RapbUserMigration extends Migration
                 'null' => false
             ]
         ]);
+
+        $this->forge->addForeignKey('rapb_id', 'rapb_master', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('rapb_to_user');
     }
 
     public function down()
     {
-        //
+        $this->forge->dropTable('rapb_to_user');
     }
 }
