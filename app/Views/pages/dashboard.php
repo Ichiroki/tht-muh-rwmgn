@@ -20,9 +20,10 @@
             <a href="Roles">Roles</a>
         </div>
         <a href="/rapb">RAPB</a>
+        <a href="/cashflow">Cashflow</a>
         <a href="/settings">Settings</a>
         <a href="#">Tata Cara</a>
-        <a href="/logout">Logout</a>
+        <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
     <div class="dashboard">

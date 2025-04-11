@@ -21,6 +21,8 @@ $routes->group('/', ['filter' => 'guest'], function($routes) {
 $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Pages::dashboard');
 
+    $routes->get('logout', 'Authentication::logoutSystem');
+
     $routes->group('/rapb', function($routes) {
         $routes->get('/', 'RAPB::index');
         
@@ -31,5 +33,17 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->patch('edit/(:segment)', 'RAPB::update/$1');
 
         $routes->delete('delete/(:segment)', 'RAPB::delete/$1');
+    });
+
+    $routes->group('/cashflow', function($routes) {
+        $routes->get('/', 'Cashflow::index');
+        
+        $routes->get('create', 'Cashflow::create');
+        $routes->post('create', 'Cashflow::store');
+
+        $routes->get('edit/(:segment)', 'Cashflow::edit/$1');
+        $routes->patch('edit/(:segment)', 'Cashflow::update/$1');
+
+        $routes->delete('delete/(:segment)', 'Cashflow::delete/$1');
     });
 });

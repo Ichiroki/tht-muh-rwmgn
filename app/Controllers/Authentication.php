@@ -67,4 +67,10 @@ class Authentication extends BaseController
 
         return redirect()->to('/login')->with('success', 'Register berhasil! Silakan login');
     }
+
+    public function logoutSystem() 
+    {
+        session()->destroy();
+        return redirect()->to('/login')->with('success', 'Anda telah logout');
+    }
 }
