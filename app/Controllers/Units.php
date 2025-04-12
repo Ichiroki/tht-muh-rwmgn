@@ -18,7 +18,8 @@ class Units extends BaseController
 
     public function index()
     {
-        return view('/pages/units/index');
+        $data['units'] = $this->unitModel->findAll();
+        return view('/pages/units/index', $data);
     }
 
     public function create()
@@ -37,8 +38,8 @@ class Units extends BaseController
             'address'        => 'required|string',
         ]);
 
-        if($validation->withRequest($data)->run()) {
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors);
+        if(!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
         $this->unitModel->insert([
@@ -66,8 +67,8 @@ class Units extends BaseController
             'address'        => 'required|string',
         ]);
 
-        if($validation->withRequest($data)->run()) {
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors);
+        if(!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
         $this->unitModel->update($id, [
@@ -80,7 +81,7 @@ class Units extends BaseController
 
     public function delete($id)
     {
-        $this->unitModel->delete($id);
+        $this->unitModel->where('id', $id)->delete();
         return redirect()->to('/units')->with('success', 'Unit berhasil dihapus!');
     }
 }

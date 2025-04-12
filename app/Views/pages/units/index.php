@@ -13,11 +13,12 @@
         <h2>Menu</h2>
         <a href="/">Dashboard</a>
         <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-        <span>Management</span>
+        <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="Users">Users</a>
-            <a href="Roles">Roles</a>
+            <a href="users">Users</a>
+            <a href="roles">Roles</a>
+            <a href="units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
@@ -28,30 +29,26 @@
 
 
     <main class="content">
-        <a href="/rapb/create" class="btn btn-green">Buat RAPB Baru</a>
+        <a href="/units/create" class="btn btn-green">Buat Unit Baru</a>
         <table class="rwd-table">
             <tr>
                 <th>No</th>
-                <th>Nama Kegiatan</th>
-                <th>Kategori</th>
-                <th>Anggaran</th>
-                <th>Tahun</th>
+                <th>Nama Unit</th>
+                <th>Alamat</th>
                 <th>Aksi</th>
             </tr>
-            <?php if(empty($rapb)) : ?>
+            <?php if(empty($units)) : ?>
                 <p>Tidak ada data yang ditemukan.</p>
             <?php else :?>
                 <?php $no = 1; ?>
-                <?php foreach ($rapb as $r) : ?>
+                <?php foreach ($units as $unit) : ?>
                 <tr>
                     <td data-th="No"><?= $no++ ?></td>
-                    <td data-th="Nama Kegiatan"><?= esc($r['nama_kegiatan']) ?></td>
-                    <td data-th="Kategori"><?= esc($r['kategori']) ?></td>
-                    <td data-th="Anggaran"><?= number_format($r['anggaran'], 0, ',', '.') ?></td>
-                    <td data-th="Tahun"><?= esc($r['tahun']) ?></td>
+                    <td data-th="Nama Unit"><?= esc($unit['unit_name']) ?></td>
+                    <td data-th="alamat"><?= esc($unit['address']) ?></td>
                     <td data-th="Aksi">
-                        <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
-                        <form action="/rapb/delete/<?= $r['id'] ?>" method="POST">
+                        <a href="/units/edit/<?= $unit['id'] ?>" class="btn btn-blue">Edit</a>
+                        <form action="/units/delete/<?= $unit['id'] ?>" method="POST">
                             <?= csrf_field() ?>
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-red">Delete</button>

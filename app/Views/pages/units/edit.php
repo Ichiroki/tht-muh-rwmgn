@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Home Test | RAPB</title>
+    <title>Take Home Test | Units</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/pages/rapb.css">
@@ -13,11 +13,12 @@
         <h2>Menu</h2>
         <a href="/">Dashboard</a>
         <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-        <span>Management</span>
+        <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
             <a href="Users">Users</a>
             <a href="Roles">Roles</a>
+            <a href="units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
@@ -26,42 +27,21 @@
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
-
     <main class="content">
-        <form action=<?= site_url('rapb/edit/'. $rapb['id']) ?> method="POST" class="form login">
+        <form action="<?= site_url("units/edit/" . $unit['id']) ?>" method="POST" class="form login">
             <?= csrf_field() ?>
+            <input type="hidden" name="_method" value="PATCH">
             <div class="form__field">
-                <label for="email">
-                    <span>Nama Kegiatan</span>
+                <label for="unit_name">
+                    <span>Nama Unit</span>
                 </label>
-                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" value="<?= old('nama_kegiatan', $rapb['nama_kegiatan']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="unit_name" type="text" name="unit_name" value="<?= old('unit_name', $unit['unit_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
             <div class="form__field">
-                <label for="kategori">
-                    <span>Kategori</span>
+                <label for="address">
+                    <span>Alamat</span>
                 </label>
-                <input autocomplete="off" id="kategori" type="text" name="kategori" value="<?= old('kategori', $rapb['kategori']) ?>" class="form__input" placeholder="Masukkan kategori" required>
-            </div>
-
-            <div class="form__field">
-                <label for="anggaran">
-                    <span>Anggaran</span>
-                </label>
-                <input autocomplete="off" id="anggaran" type="text" name="anggaran" value="<?= old('anggaran', $rapb['anggaran']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
-            </div>
-
-            <div class="form__field">
-                <label for="tahun">
-                    <span>Tahun</span>
-                </label>
-                <input autocomplete="off" id="tahun" type="number" min="1912" max="9999" name="tahun" value="<?= old('tahun', $rapb['tahun']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
-            </div>
-
-            <div class="form__field">
-                <label for="deskripsi">
-                    <span>Deskripsi</span>
-                </label>
-                <textarea id="deskripsi" name="deskripsi" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('deskripsi', $rapb['deskripsi'])) ?></textarea>
+                <textarea id="address" type="text" name="address" class="form__input" rows="10" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('address', $unit['address'])) ?></textarea>
             </div>
 
             <div class="form__field">
