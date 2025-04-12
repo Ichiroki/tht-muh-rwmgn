@@ -58,7 +58,7 @@ class Users extends BaseController
 
     public function edit($id)
     {
-        $data['unit'] = $this->userModel->find($id);
+        $data['user'] = $this->userModel->find($id);
         return view('/pages/user/edit', $data);
     }
 

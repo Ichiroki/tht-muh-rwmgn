@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Home Test | RAPB</title>
+    <title>Take Home Test | User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/pages/rapb.css">
@@ -16,8 +16,9 @@
         <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="Users">Users</a>
-            <a href="Roles">Roles</a>
+            <a href="/users">Users</a>
+            <a href="/roles">Roles</a>
+            <a href="/units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
@@ -28,14 +29,14 @@
 
 
     <main class="content">
-        <form action=<?= site_url('rapb/edit/'. $rapb['id']) ?> method="POST" class="form form-input">
+        <form action=<?= site_url('isers/edit/'. $user['id']) ?> method="POST" class="form form-input">
             <?= csrf_field() ?>
             <input type="hidden" name="_method" value="PATCH">
             <div class="form__field">
                 <label for="activity_name">
                     <span>Nama Kegiatan</span>
                 </label>
-                <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name', $rapb['activity_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name', $user['activity_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
             <div class="form__field">
                 <label for="category">
@@ -44,7 +45,7 @@
                 <select name="category" id="" class="form__input">
                     <option value="">PIlih kategori</option>
                     <?php foreach($categories as $category) : ?>
-                        <option value=<?= $category ?> <?= $category === $rapb['category'] ? "selected" : "" ?>><?= $category ?></option>
+                        <option value=<?= $category ?> <?= $category === $user['category'] ? "selected" : "" ?>><?= $category ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -53,21 +54,21 @@
                 <label for="amount">
                     <span>Anggaran</span>
                 </label>
-                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount', $rapb['amount']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount', $user['amount']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
             </div>
 
             <div class="form__field">
                 <label for="year">
                     <span>Tahun</span>
                 </label>
-                <input autocomplete="off" id="year" type="number" min="1912" max="9999" name="year" value="<?= old('year', $rapb['year']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="year" type="number" min="1912" max="9999" name="year" value="<?= old('year', $user['year']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
 
             <div class="form__field">
                 <label for="description">
                     <span>Deskripsi</span>
                 </label>
-                <textarea id="description" name="description" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('description', $rapb['description'])) ?></textarea>
+                <textarea id="description" name="description" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('description', $user['description'])) ?></textarea>
             </div>
 
             <div class="form__field">

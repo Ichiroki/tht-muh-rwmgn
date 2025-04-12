@@ -56,11 +56,15 @@ class Authentication extends BaseController
         ];
 
         if(!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validators->getErrors());
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+        $uuid = service('uuid');
+        $id = $uuid->uuid4()->toString();
+
         $userModel = new User();
-        $userModel->save([
+        $userModel->insert([
+            'id' => $id,
             'first_name' => $this->request->getPost('first_name'),
             'last_name' => $this->request->getPost('last_name'),
             'email' => $this->request->getPost('email'),

@@ -32,11 +32,11 @@
         <table class="rwd-table">
             <tr>
                 <th>No</th>
-                <th>Nama Kegiatan</th>
-                <th>Kategori</th>
-                <th>Anggaran</th>
-                <th>Tahun</th>
-                <th>Aksi</th>
+                <th>Nama Depan</th>
+                <th>Nama Belakang</th>
+                <th>Email</th>
+                <th>Unit</th>
+                <th>Role</th>
             </tr>
             <?php if(empty($users)) : ?>
                 <p>Tidak ada data yang ditemukan.</p>
@@ -45,10 +45,11 @@
                 <?php foreach ($users as $r) : ?>
                 <tr>
                     <td data-th="No"><?= $no++ ?></td>
-                    <td data-th="Nama Kegiatan"><?= esc($r['activity_name']) ?></td>
-                    <td data-th="Kategori"><?= esc(strtoupper($r['category'])) ?></td>
-                    <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
-                    <td data-th="Tahun"><?= esc($r['year']) ?></td>
+                    <td data-th="Nama Depan"><?= esc($r['first_name']) ?></td>
+                    <td data-th="Nama Belakang"><?= esc($r['last_name']) ?></td>
+                    <td data-th="Email"><?= esc(strtoupper($r['email'])) ?></td>
+                    <td data-th="Unit"><?= esc(strtoupper($r['unit_id'])) ?></td>
+                    <td data-th="Role"><?= esc(strtoupper($r['role'])) ?></td>
                     <td data-th="Aksi">
                         <a href="/users/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
                         <form action="/users/delete/<?= $r['id'] ?>" method="POST">

@@ -35,6 +35,18 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->delete('delete/(:segment)', 'Units::delete/$1');
     });
 
+    $routes->group('/users', function($routes) {
+        $routes->get('/', 'Users::index');
+        
+        $routes->get('create', 'Users::create');
+        $routes->post('create', 'Users::store');
+
+        $routes->get('edit/(:segment)', 'Users::edit/$1');
+        $routes->patch('edit/(:segment)', 'Users::update/$1');
+
+        $routes->delete('delete/(:segment)', 'Users::delete/$1');
+    });
+
     $routes->group('/roles', function($routes) {
         $routes->get('/', 'Roles::index');
         
