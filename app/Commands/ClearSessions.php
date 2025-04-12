@@ -12,28 +12,28 @@ class ClearSessions extends BaseCommand
      *
      * @var string
      */
-    protected $group = 'App';
+    protected $group = 'custom';
 
     /**
      * The Command's Name
      *
      * @var string
      */
-    protected $name = 'command:name';
+    protected $name = 'clear:sessions';
 
     /**
      * The Command's Description
      *
      * @var string
      */
-    protected $description = '';
+    protected $description = 'Delete all session file in writable/session';
 
     /**
      * The Command's Usage
      *
      * @var string
      */
-    protected $usage = 'command:name [arguments] [options]';
+    protected $usage = 'clear:sessions [arguments] [options]';
 
     /**
      * The Command's Arguments
@@ -56,6 +56,13 @@ class ClearSessions extends BaseCommand
      */
     public function run(array $params)
     {
-        //
+        $files = glob(WRITEPATH . 'session/*');
+        foreach ($files as $file) {
+            if(is_file($file)) {
+                unlink($file);
+            }
+        }
+
+        CLI::write('All sessions successfully deleted');
     }
 }
