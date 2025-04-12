@@ -11,7 +11,8 @@ class RoleMigration extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'BIGINT',
-                'constraint' => 100
+                'constraint' => 100,
+                'auto_increment' => true
             ],
             'role_name' => [
                 'type' => 'CHAR',

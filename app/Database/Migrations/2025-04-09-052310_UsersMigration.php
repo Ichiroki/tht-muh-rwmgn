@@ -38,7 +38,8 @@ class Users extends Migration
             'unit_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 10,
-                'null' => true
+                'unsigned' => true,
+                'auto_increment' => true
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -51,7 +52,7 @@ class Users extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'SET NULL');
+        $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('users');
     }
 

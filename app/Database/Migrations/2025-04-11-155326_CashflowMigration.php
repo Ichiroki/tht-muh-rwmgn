@@ -16,6 +16,8 @@ class CashflowMigration extends Migration
             'unit_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 10,
+                'unsigned' => true,
+                'auto_increment' => true
             ],
             'rapb_id' => [
                 'type' => 'CHAR',
