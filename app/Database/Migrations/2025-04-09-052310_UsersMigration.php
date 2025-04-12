@@ -10,10 +10,8 @@ class Users extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 10,
-                'unsigned' => true,
-                'auto_increment' => true
+                'type' => 'CHAR',
+                'constraint' => 36,
             ],
             'first_name' => [
                 'type' => 'VARCHAR',

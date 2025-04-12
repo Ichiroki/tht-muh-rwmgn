@@ -23,6 +23,18 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
     $routes->get('logout', 'Authentication::logoutSystem');
 
+    $routes->group('/units', function($routes) {
+        $routes->get('/', 'Units::index');
+        
+        $routes->get('create', 'Units::create');
+        $routes->post('create', 'Units::store');
+
+        $routes->get('edit/(:segment)', 'Units::edit/$1');
+        $routes->patch('edit/(:segment)', 'Units::update/$1');
+
+        $routes->delete('delete/(:segment)', 'Units::delete/$1');
+    });
+
     $routes->group('/rapb', function($routes) {
         $routes->get('/', 'RAPB::index');
         

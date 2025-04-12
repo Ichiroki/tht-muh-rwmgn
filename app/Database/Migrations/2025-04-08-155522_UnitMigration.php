@@ -12,6 +12,8 @@ class UnitMigration extends Migration
             'id' => [
                 'type' => 'BIGINT',
                 'constraint' => 10,
+                'unsigned' => true,
+                'auto_increment' => true
             ],
             'unit_name' => [
                 'type' => 'VARCHAR',

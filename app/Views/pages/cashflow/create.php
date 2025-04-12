@@ -6,12 +6,12 @@
     <title>Take Home Test | RAPB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/pages/rapb.css">
+    <link rel="stylesheet" href="/css/pages/cashflow.css">
 </head>
 <body>
     <div class="sidebar">
         <h2>Menu</h2>
-        <a href="/dashboard">Dashboard</a>
+        <a href="/">Dashboard</a>
         <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
         <span>Management</span>
         <i class="fa fa-chevron-down"></i></button>
@@ -28,40 +28,54 @@
 
 
     <main class="content">
-        <form action="<?= site_url('rapb/create') ?>" method="POST" class="form login">
+        <form action="<?= site_url('rapb/create') ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
             <div class="form__field">
                 <label for="email">
-                    <span>Nama Kegiatan</span>
+                    <span>Unit</span>
                 </label>
-                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" value="<?= old('nama_kegiatan') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="unit" type="text" name="unit" value="<?= old('unit') ?>" class="form__input" placeholder="Isi asal unit / organisasi" required>
             </div>
             <div class="form__field">
-                <label for="kategori">
+                <label for="rapb_id">
+                    <span>RAPB</span>
+                </label>
+                <input autocomplete="off" id="rapb_id" type="text" name="rapb_id" value="<?= old('rapb_id') ?>" class="form__input" placeholder="Masukkan jenis RAPB" required>
+            </div>
+
+            <div class="form__field">
+                <label for="type">
+                    <span>Tipe</span>
+                </label>
+                <input autocomplete="off" id="type" type="text" name="type" value="<?= old('type') ?>" class="form__input" placeholder="Masukkan Tipe Transaksi" required>
+            </div>
+
+            <div class="form__field">
+                <label for="category">
                     <span>Kategori</span>
                 </label>
-                <input autocomplete="off" id="kategori" type="text" name="kategori" value="<?= old('kategori') ?>" class="form__input" placeholder="Masukkan kategori" required>
+                <input autocomplete="off" id="category" type="number" min="1912" max="9999" name="category" value="<?= old('category') ?>" class="form__input" placeholder="Masukkan jenis kategori" required>
             </div>
 
             <div class="form__field">
-                <label for="anggaran">
-                    <span>Anggaran</span>
+                <label for="amount">
+                    <span>Biaya</span>
                 </label>
-                <input autocomplete="off" id="anggaran" type="text" name="anggaran" value="<?= old('anggaran') ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="amount" type="number" min="1912" max="9999" name="amount" value="<?= old('amount') ?>" class="form__input" placeholder="Masukkan jenis kategori" required>
             </div>
 
             <div class="form__field">
-                <label for="tahun">
-                    <span>Tahun</span>
-                </label>
-                <input autocomplete="off" id="tahun" type="number" min="1912" max="9999" name="tahun" value="<?= old('tahun') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
-            </div>
-
-            <div class="form__field">
-                <label for="deskripsi">
+                <label for="information">
                     <span>Deskripsi</span>
                 </label>
-                <textarea id="deskripsi" type="text" name="deskripsi" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('deskripsi')) ?></textarea>
+                <textarea id="information" type="text" name="information" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('information')) ?></textarea>
+            </div>
+
+            <div class="form__field">
+                <label for="date">
+                    <span>Tanggal</span>
+                </label>
+                <input autocomplete="off" id="date" type="date" name="date" value="<?= old('date') ?>" class="form__input" placeholder="Masukkan jenis kategori" required>
             </div>
 
             <div class="form__field">

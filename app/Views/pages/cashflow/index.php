@@ -11,7 +11,7 @@
 <body>
     <div class="sidebar">
         <h2>Menu</h2>
-        <a href="/dashboard">Dashboard</a>
+        <a href="/">Dashboard</a>
         <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
         <span>Management</span>
         <i class="fa fa-chevron-down"></i></button>
@@ -28,7 +28,7 @@
 
 
     <main class="content">
-        <a href="/rapb/create" class="btn btn-green">Buat RAPB Baru</a>
+        <a href="/cashflow/create" class="btn btn-green">Buat Transaksi Baru</a>
         <table class="rwd-table">
             <tr>
                 <th>No</th>

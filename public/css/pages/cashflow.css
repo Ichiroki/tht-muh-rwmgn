@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,700&display=swap');
+
+:root {
+    --content-color: #24282d;
+    --sidebar-color: #2c3338;
+    --sidebar-hover: #3c444b;
+    --font-poppins: "Poppins", sans-serif;
+
+    /* Style for Create RAPB */
+
+    --baseColor: #606468;--baseColor: #606468;
+
+    --htmlFontSize: 100%;
+  
+    --iconFill: var(--baseColor);
+
+    --bodyBackgroundColor: #2c3338;
+    --bodyColor: var(--baseColor);
+    --bodyFontFamily: "Open Sans";
+    --bodyFontFamilyFallback: sans-serif;
+    --bodyFontSize: 0.875rem;
+    --bodyFontWeight: 400;
+    --bodyLineHeight: 1.5;
+
+    --anchorColor: #eee;
+
+    --formGap: 0.875rem;
+
+    --loginBorderRadus: 0.25rem;
+    --loginColor: #eee;
+  
+    --loginInputBackgroundColor: #3b4148;
+    --loginInputHoverBackgroundColor: #434a52;
+  
+    --loginLabelBackgroundColor: #363b41;
+  
+    --loginSubmitBackgroundColor: #ea4c88;
+    --loginSubmitColor: #eee;
+    --loginSubmitHoverBackgroundColor: #d44179;
+
+    /* Style for Create RAPB */
+}
+
+* {
+    color: #eee;
+    font-family: var(--font-poppins);
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        height: 100vh;
+        width: 100vw;
+
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .sidebar {
+        width: 250px;
+        background-color: var(--sidebar-color);
+        color: #eee;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #eee;
+        }
+    
+        a {
+            color: #eee;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 6px;
+            transition: all 0.3s;
+    
+            &:hover {
+                background: var(--sidebar-hover);
+                margin-left: 5px;
+            }
+        }
+    }
+    
+    .dropdown-btn {
+        background-color: var(--sidebar-color);
+        outline: none;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        text-align: left;
+        border-radius: 6px;
+        cursor: pointer;
+    
+        transition: all .3s;
+    
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        &:hover {
+            background: var(--sidebar-hover);
+            margin-left: 5px;
+        }
+    }
+    
+    .dropdown {
+        display: none;
+        padding-left: 15px;
+    
+        flex-direction: column;
+        gap: 5px;
+    
+        & a {
+            font-size: 14px;
+    
+            transition: all .3s;
+    
+            &:hover {
+                background: var(--sidebar-hover);
+                margin-left: 5px;
+            }
+        }
+    }
+    
+    .content {
+        padding: 20px 5rem;
+        background: var(--content-color);
+        height: 100vh;
+        min-width: calc(100% - 250px);
+
+        overflow-y: auto;
+    }
+}
+
+/* Style for create RAPB */
+
+.align {
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  place-items: center;
+}
+
+/* helpers/hidden.css */
+
+.hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.icons {
+  display: none;
+}
+
+.icon {
+  height: 1em;
+  display: inline-block;
+  fill: #606468;
+  fill: var(--iconFill);
+  width: 1em;
+  vertical-align: middle;
+}
+
+a {
+    color: #eee;
+    color: var(--anchorColor);
+    outline: 0;
+    text-decoration: none;
+  }
+  
+  a:focus,
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* modules/form.css */
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+  }
+  
+  input,
+  textarea {
+    background-image: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    -webkit-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+  }
+  
+  input[type="submit"] {
+    cursor: pointer;
+  }
+  
+  .form {
+    width: 50%;
+    display: grid;
+    grid-gap: 0.875rem;
+    gap: 0.875rem;
+    grid-gap: var(--formGap);
+    gap: var(--formGap);
+  }
+  
+  .form input[type="password"],
+  .form input[type="date"],
+  .form input[type="text"],
+  .form input[type="number"],
+  .form input[type="submit"],
+  .form textarea {
+    width: 100%;
+  }
+  
+  .form__field {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .form__input {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  
+  /* modules/login.css */
+  
+  .form-input {
+    color: #eee;
+    color: var(--loginColor);
+  }
+  
+  .form-input label,
+  .form-input input[type="text"],
+  .form-input input[type="date"],
+  .form-input input[type="password"],
+  .form-input input[type="number"],
+  .form-input input[type="submit"],
+  .form-input textarea {
+    border-radius: 0.25rem;
+    border-radius: var(--loginBorderRadus);
+    padding: 1rem;
+  }
+  
+  .form-input label {
+    background-color: #363b41;
+    background-color: var(--loginLabelBackgroundColor);
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  .form-input input[type="password"],
+  .form-input input[type="date"],
+  .form-input input[type="number"],
+  .form-input input[type="text"],
+  .form-input textarea {
+    background-color: #3b4148;
+    background-color: var(--loginInputBackgroundColor);
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  
+  .form-input input[type="password"]:focus,
+  .form-input input[type="password"]:hover,
+  .form-input input[type="date"]:focus,
+  .form-input input[type="date"]:hover,
+  .form-input input[type="number"]:focus,
+  .form-input input[type="number"]:hover,
+  .form-input input[type="text"]:focus,
+  .form-input input[type="text"]:hover,
+  .form-input textarea:focus, 
+  .form-input textarea:hover {
+    background-color: #434a52;
+    background-color: var(--loginInputHoverBackgroundColor);
+  }
+  
+  .form-input input[type="submit"] {
+    background-color: #ea4c88;
+    background-color: var(--loginSubmitBackgroundColor);
+    color: #eee;
+    color: var(--loginSubmitColor);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .form-input input[type="submit"]:focus,
+  .form-input input[type="submit"]:hover {
+    background-color: #d44179;
+    background-color: var(--loginSubmitHoverBackgroundColor);
+  }
+
+  /* modules/text.css */
+  
+  p {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .text--center {
+    text-align: center;
+  }
+
+/* Table Style */
+
+.rwd-table {
+  margin: 1em 0;
+  min-width: 100%;
+}
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.rwd-table th {
+  display: none;
+}
+.rwd-table td {
+  display: block;
+}
+.rwd-table td:first-child {
+  padding-top: .5em;
+}
+.rwd-table td:last-child {
+  padding-bottom: .5em;
+}
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 6.5em;
+  display: inline-block;
+}
+@media (min-width: 480px) {
+  .rwd-table td:before {
+    display: none;
+  }
+}
+.rwd-table th, .rwd-table td {
+  text-align: left;
+}
+@media (min-width: 480px) {
+  .rwd-table th, .rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .rwd-table th:first-child, .rwd-table td:first-child {
+    padding-left: 0;
+  }
+  .rwd-table th:last-child, .rwd-table td:last-child {
+    padding-right: 0;
+  }
+}
+
+.rwd-table {
+  background: #34495E;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+}
+.rwd-table tr {
+  border-color: #46637f;
+}
+.rwd-table th, .rwd-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .rwd-table th, .rwd-table td {
+    padding: 1em !important;
+  }
+}
+.rwd-table th, .rwd-table td:before {
+  color: #dd5;
+}
+
+/* Utils */
+
+.btn {
+    display: block;
+    outline: none;
+    text-decoration: none;
+    width: fit-content;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+
+    cursor: pointer;
+
+    &.btn-green {
+        background-color: green;
+    }
+
+    &.btn-blue {
+        background-color: blue;
+    }
+
+    &.btn-yellow {
+        background-color: yellow;
+    }
+
+    &.btn-red {
+        background-color: red;
+    }
+}

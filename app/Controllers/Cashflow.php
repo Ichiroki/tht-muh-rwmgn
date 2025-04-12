@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Cashflow as CashflowModel;
+use App\Models\RAPB;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Cashflow extends BaseController
@@ -38,6 +39,12 @@ class Cashflow extends BaseController
 
     public function store()
     {
+        $data = $this->request->getPost();
+
+        $uuid = service('uuid');
+        $id = $uuid->uuid4()->toString();
+
+        $data['id'] = $id;
         $validation = \Config\Services::validation();
 
         $validation->setRules([
@@ -54,8 +61,6 @@ class Cashflow extends BaseController
         }
 
         $user = session()->get();
-        $uuid = service('uuid');
-        $id = $uuid->uuid4()->toString();
 
         $this->cashflowModel->insert([
             'id' => $id,
@@ -67,6 +72,15 @@ class Cashflow extends BaseController
             'information' => $this->request->getPost('information'),
             'date' => $this->request->getPost('date'),
         ]);
+
+        $rapbModel = new RAPB();
+        $rapb = $rapbModel->find($data['rapb_id']);
+
+        if($data['type'] === 'pengeluaran') {
+            $rapb['amount'] < $data['amount'] ? redirect()->back()->with('error', 'jumlah melebihi jumlah anggaran yang tersedia') : $rapb['used_amount'] -= $data['amount'];
+        } else if ($data['type'] === 'pemasukkan') {
+            $rapb['amount'] += $data['amount'];
+        }
 
         return redirect()->to('/cashflow')->with('success', 'Bukti transaksi berhasil ditambahkan');
     }
@@ -80,6 +94,8 @@ class Cashflow extends BaseController
     public function update($id)
     {
         $validation = \Config\Services::validation();
+
+        $data = $this->request->getPost();
 
         $validation->setRules([
             'rapb_id'     => 'required',
@@ -95,12 +111,12 @@ class Cashflow extends BaseController
         }
 
         $this->cashflowModel->update($id, [
-            'rapb_id'     => $this->request->getPost('rapb_id'),
-            'type'        => $this->request->getPost('type'),
-            'category'    => $this->request->getPost('category'),
-            'amount'      => $this->request->getPost('amount'),
-            'information' => $this->request->getPost('information'),
-            'date'        => $this->request->getPost('date'),
+            'rapb_id'     => $data['rapb_id'],
+            'type'        => $data['type'],
+            'category'    => $data['category'],
+            'amount'      => $data['amount'],
+            'information' => $data['information'],
+            'date'        => $data['date'],
         ]);
 
         return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil diperbarui!');
@@ -110,5 +126,16 @@ class Cashflow extends BaseController
     {
         $this->cashflowModel->delete($id);
         return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil dihapus!');
+
+        $rapbModel = new \App\Models\RapbModel();
+        $rapb = $rapbModel->find($cashflow['rapb_id']);
+
+        if($cashflow['type'] === 'pengeluaran') {
+            $rapb['used_amount'] += $cashflow['amount'];
+        } else if ($cashflow['type'] === 'pemasukan') {
+            $rapb['amount'] -= $cashflow['amount'];
+        }
+
+        $rapbModel->save($rapb);
     }
 }

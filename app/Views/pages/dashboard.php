@@ -11,13 +11,14 @@
 <body>
     <div class="sidebar">
         <h2>Menu</h2>
-        <a href="/dashboard">Dashboard</a>
+        <a href="/">Dashboard</a>
         <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-        <span>Management</span>
+        <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="Users">Users</a>
-            <a href="Roles">Roles</a>
+            <a href="users">Users</a>
+            <a href="roles">Roles</a>
+            <a href="units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
