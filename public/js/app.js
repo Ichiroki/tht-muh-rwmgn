@@ -4,11 +4,11 @@ const toggleDropdown = (id) => {
     dropdown.style.display = dropdown.style.display === "flex" ? 'none' : 'flex'
 }
 
-// Input Anggaran
-const inputAnggaran = document.getElementById('anggaran')
+// Input Amount
+const inputAmount = document.getElementById('amount')
 
-if(inputAnggaran) {
-    inputAnggaran.addEventListener('input', function(e) {
+if(inputAmount) {
+    inputAmount.addEventListener('input', function(e) {
         let rawValue = this.value.replace(/\D/g, '')
         
         if(rawValue) {

@@ -45,10 +45,10 @@
                 <?php foreach ($rapb as $r) : ?>
                 <tr>
                     <td data-th="No"><?= $no++ ?></td>
-                    <td data-th="Nama Kegiatan"><?= esc($r['nama_kegiatan']) ?></td>
-                    <td data-th="Kategori"><?= esc($r['kategori']) ?></td>
-                    <td data-th="Anggaran"><?= number_format($r['anggaran'], 0, ',', '.') ?></td>
-                    <td data-th="Tahun"><?= esc($r['tahun']) ?></td>
+                    <td data-th="Nama Kegiatan"><?= esc($r['activity_name']) ?></td>
+                    <td data-th="Kategori"><?= esc(strtoupper($r['category'])) ?></td>
+                    <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
+                    <td data-th="Tahun"><?= esc($r['year']) ?></td>
                     <td data-th="Aksi">
                         <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
                         <form action="/rapb/delete/<?= $r['id'] ?>" method="POST">

@@ -13,7 +13,7 @@
         <h2>Menu</h2>
         <a href="/">Dashboard</a>
         <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-        <span>Management</span>
+        <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
             <a href="Users">Users</a>
@@ -28,40 +28,46 @@
 
 
     <main class="content">
-        <form action=<?= site_url('rapb/edit/'. $rapb['id']) ?> method="POST" class="form login">
+        <form action=<?= site_url('rapb/edit/'. $rapb['id']) ?> method="POST" class="form form-input">
             <?= csrf_field() ?>
+            <input type="hidden" name="_method" value="PATCH">
             <div class="form__field">
-                <label for="email">
+                <label for="activity_name">
                     <span>Nama Kegiatan</span>
                 </label>
-                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" value="<?= old('nama_kegiatan', $rapb['nama_kegiatan']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name', $rapb['activity_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
             <div class="form__field">
-                <label for="kategori">
+                <label for="category">
                     <span>Kategori</span>
                 </label>
-                <input autocomplete="off" id="kategori" type="text" name="kategori" value="<?= old('kategori', $rapb['kategori']) ?>" class="form__input" placeholder="Masukkan kategori" required>
+                <select name="category" id="" class="form__input">
+                    <option value="">PIlih kategori</option>
+                    <?php foreach($categories as $category) : ?>
+                        <option value=<?= $category ?> <?= $category === $rapb['category'] ? "selected" : "" ?>><?= $category ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="form__field">
-                <label for="anggaran">
+                <label for="amount">
                     <span>Anggaran</span>
                 </label>
-                <input autocomplete="off" id="anggaran" type="text" name="anggaran" value="<?= old('anggaran', $rapb['anggaran']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount', $rapb['amount']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
             </div>
 
             <div class="form__field">
-                <label for="tahun">
+                <label for="year">
                     <span>Tahun</span>
                 </label>
-                <input autocomplete="off" id="tahun" type="number" min="1912" max="9999" name="tahun" value="<?= old('tahun', $rapb['tahun']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="year" type="number" min="1912" max="9999" name="year" value="<?= old('year', $rapb['year']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
 
             <div class="form__field">
-                <label for="deskripsi">
+                <label for="description">
                     <span>Deskripsi</span>
                 </label>
-                <textarea id="deskripsi" name="deskripsi" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('deskripsi', $rapb['deskripsi'])) ?></textarea>
+                <textarea id="description" name="description" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('description', $rapb['description'])) ?></textarea>
             </div>
 
             <div class="form__field">

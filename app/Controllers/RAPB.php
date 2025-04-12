@@ -26,11 +26,11 @@ class RAPB extends BaseController
 
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'nama_kegiatan' => 'required',
-            'kategori' => 'required',
-            'anggaran' => 'required',
-            'tahun' => 'required|numeric',
-            'deskripsi' => 'required'
+            'activity_name' => 'required',
+            'category' => 'required|in_list[pengeluaran,pemasukan]',
+            'amount' => 'required',
+            'year' => 'required|numeric',
+            'description' => 'required'
         ]);
 
         if(!$validation->withRequest($this->request)->run()) {
@@ -41,15 +41,15 @@ class RAPB extends BaseController
         $uuid4 = $uuid->uuid4();
         $uuids = $uuid4->toString();
 
-        $anggaran = str_replace(['Rp', '.'], '', $this->request->getPost('anggaran'));
+        $amount = str_replace(['Rp', '.'], '', $this->request->getPost('amount'));
 
         $rapbModel->insert([
             'id' => $uuids,
-            'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
-            'kategori' => $this->request->getPost('kategori'),
-            'anggaran' => $anggaran,
-            'tahun' => $this->request->getPost('tahun'),
-            'deskripsi' => $this->request->getPost('deskripsi'),
+            'activity_name' => $this->request->getPost('activity_name'),
+            'category' => $this->request->getPost('category'),
+            'amount' => $amount,
+            'year' => $this->request->getPost('year'),
+            'description' => $this->request->getPost('description'),
         ]);
 
         return redirect()->to('/rapb')->with('success', 'Data RAPB berhasil disimpan!');
@@ -58,6 +58,7 @@ class RAPB extends BaseController
     public function edit($id) {
         $rapbModel = new RAPBModel();
         $data['rapb'] = $rapbModel->find($id);
+        $data['categories'] = ['pengeluaran', 'pemasukan'];
 
         if(!$data['rapb']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException("Data RAPB dengan id $id tidak ditemukan.");
@@ -71,25 +72,25 @@ class RAPB extends BaseController
 
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'nama_kegiatan' => 'required',
-            'kategori' => 'required',
-            'anggaran' => 'required',
-            'tahun' => 'required|numeric',
-            'deskripsi' => 'required'
+            'activity_name' => 'required',
+            'category' => 'required|in_list[pengeluaran,pemasukan]',
+            'amount' => 'required',
+            'year' => 'required|numeric',
+            'description' => 'required'
         ]);
 
-        if(!$validation->withRequest($this->request)->run()) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Data RAPB dengan id $id tidak ditemukan.");
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        $anggaran = str_replace(['Rp', '.'], '', $this->request->getPost('anggaran'));
+        $amount = str_replace(['Rp', '.'], '', $this->request->getPost('amount'));
 
         $rapbModel->update($id, [
-            'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
-            'kategori' => $this->request->getPost('kategori'),
-            'anggaran' => $anggaran,
-            'tahun' => $this->request->getPost('tahun'),
-            'deskripsi' => $this->request->getPost('deskripsi'),
+            'activity_name' => $this->request->getPost('activity_name'),
+            'category' => $this->request->getPost('category'),
+            'amount' => $amount,
+            'year' => $this->request->getPost('year'),
+            'description' => $this->request->getPost('description'),
         ]);
 
         return redirect()->to('/rapb')->with('success', 'Data berhasil diperbarui');

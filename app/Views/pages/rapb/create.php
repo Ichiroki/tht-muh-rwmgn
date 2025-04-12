@@ -26,42 +26,45 @@
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
-
     <main class="content">
-        <form action="<?= site_url('rapb/create') ?>" method="POST" class="form login">
+        <form action="<?= site_url('rapb/create') ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
             <div class="form__field">
                 <label for="email">
                     <span>Nama Kegiatan</span>
                 </label>
-                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" value="<?= old('nama_kegiatan') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
             <div class="form__field">
-                <label for="kategori">
+                <label for="category">
                     <span>Kategori</span>
                 </label>
-                <input autocomplete="off" id="kategori" type="text" name="kategori" value="<?= old('kategori') ?>" class="form__input" placeholder="Masukkan kategori" required>
+                <select name="category" id="" class="form__input">
+                    <option value="">PIlih kategori</option>
+                    <option value="pengeluaran">Pengeluaran</option>
+                    <option value="pemasukan">Pemasukan</option>
+                </select>
             </div>
 
             <div class="form__field">
-                <label for="anggaran">
+                <label for="amount">
                     <span>Anggaran</span>
                 </label>
-                <input autocomplete="off" id="anggaran" type="text" name="anggaran" value="<?= old('anggaran') ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount') ?>" class="form__input" placeholder="Masukkan Anggaran" required>
             </div>
 
             <div class="form__field">
-                <label for="tahun">
+                <label for="year">
                     <span>Tahun</span>
                 </label>
-                <input autocomplete="off" id="tahun" type="number" min="1912" max="9999" name="tahun" value="<?= old('tahun') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="year" type="number" min="1912" max="9999" name="year" value="<?= old('year') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
 
             <div class="form__field">
-                <label for="deskripsi">
+                <label for="description">
                     <span>Deskripsi</span>
                 </label>
-                <textarea id="deskripsi" type="text" name="deskripsi" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('deskripsi')) ?></textarea>
+                <textarea id="description" type="text" name="description" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('description')) ?></textarea>
             </div>
 
             <div class="form__field">

@@ -18,8 +18,8 @@ class RapbMigration extends Migration
                 'constraint' => 255,
             ],
             'category' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100,
+                'type' => 'ENUM',
+                'constraint' => ['pengeluaran', 'pemasukkan'],
             ],
             'amount' => [
                 'type' => 'DECIMAL',
