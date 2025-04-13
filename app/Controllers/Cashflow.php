@@ -21,12 +21,12 @@ class Cashflow extends BaseController
     {
         $user = session()->get();
         $role = $user['role'];
-        $unitId = $user['unit_id'];
+        $unitId = (int) $user['unit_id'];
 
-        if(in_array($role, ['admin', 'pcm'])) {
-            $data['cashflow'] = $this->cashflowModel->findAll();
+        if($role === 'admin') {
+            $data['cashflow'] = $this->cashflowModel->getCashflowWithUnitAndRAPB();
         } else {
-            $data['cashflow'] = $this->cashflowModel->where('unit_id', $unitId)->findAll();
+            $data['cashflow'] = $this->cashflowModel->getCashflowWithUnitAndRAPB($unitId);
         }
 
         return view('pages/cashflow/index', $data);

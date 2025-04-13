@@ -17,13 +17,21 @@ class Cashflow extends Model
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 
-    protected array $casts = [];
-    protected array $castHandlers = [];
-
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    public function getCashflowWithUnitAndRAPB($unitId = null) {
+        $builder = $this->select('cashflows.*, units.unit_name, rapb_master.activity_name')
+        ->join('units', 'units.id = cashflows.unit_id')
+        ->join('rapb_master', 'rapb_master.id = cashflows.rapb_id');
+        
+        if($unitId !== null) {
+            return $builder->findAll();
+        }
+        return $builder->where('cashflows.unit_id', $unitId);
+    }
 }
