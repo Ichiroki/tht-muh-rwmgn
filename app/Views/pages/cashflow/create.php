@@ -26,42 +26,48 @@
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
-
     <main class="content">
-        <form action="<?= site_url('rapb/create') ?>" method="POST" class="form form-input">
+        <form action="<?= site_url('cashflow/create') ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
             <div class="form__field">
-                <label for="email">
+                <label for="unit_id">
                     <span>Unit</span>
                 </label>
-                <input autocomplete="off" id="unit" type="text" name="unit" value="<?= old('unit') ?>" class="form__input" placeholder="Isi asal unit / organisasi" required>
+                <select name="unit_id" id="" class="form__input">
+                    <option value="">Pilih Unit</option>
+                    <?php foreach($units as $unit) : ?>
+                    <option value="<?= $unit['id'] ?>"><?= $unit['unit_name'] ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
             <div class="form__field">
                 <label for="rapb_id">
                     <span>RAPB</span>
                 </label>
-                <input autocomplete="off" id="rapb_id" type="text" name="rapb_id" value="<?= old('rapb_id') ?>" class="form__input" placeholder="Masukkan jenis RAPB" required>
-            </div>
-
-            <div class="form__field">
-                <label for="type">
-                    <span>Tipe</span>
-                </label>
-                <input autocomplete="off" id="type" type="text" name="type" value="<?= old('type') ?>" class="form__input" placeholder="Masukkan Tipe Transaksi" required>
+                <select name="rapb_id" id="" class="form__input">
+                    <option value="">Pilih RAPB</option>
+                    <?php foreach($rapbs as $rapb) : ?>
+                    <option value="<?= $rapb['id'] ?>"><?= $rapb['activity_name'] ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="form__field">
                 <label for="category">
                     <span>Kategori</span>
                 </label>
-                <input autocomplete="off" id="category" type="number" min="1912" max="9999" name="category" value="<?= old('category') ?>" class="form__input" placeholder="Masukkan jenis kategori" required>
+                <select name="category" id="" class="form__input">
+                    <option value="">Pilih Kategori</option>
+                    <option value="pemasukan">Pemasukan</option>
+                    <option value="pengeluaran">Pengeluaran</option>
+                </select>
             </div>
 
             <div class="form__field">
                 <label for="amount">
                     <span>Biaya</span>
                 </label>
-                <input autocomplete="off" id="amount" type="number" min="1912" max="9999" name="amount" value="<?= old('amount') ?>" class="form__input" placeholder="Masukkan jenis kategori" required>
+                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount') ?>" class="form__input" placeholder="Masukkan angka biaya" required>
             </div>
 
             <div class="form__field">

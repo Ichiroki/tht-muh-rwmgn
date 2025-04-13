@@ -63,7 +63,6 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-
         overflow-x: auto;
     
         h2 {
@@ -197,6 +196,7 @@ a {
   }
   
   input,
+  select,
   textarea {
     background-image: none;
     border: 0;
@@ -224,10 +224,11 @@ a {
   }
   
   .form input[type="password"],
-  .form input[type="date"],
   .form input[type="text"],
   .form input[type="number"],
   .form input[type="submit"],
+  .form input[type="date"],
+  .form select,
   .form textarea {
     width: 100%;
   }
@@ -253,10 +254,11 @@ a {
   
   .form-input label,
   .form-input input[type="text"],
-  .form-input input[type="date"],
   .form-input input[type="password"],
   .form-input input[type="number"],
   .form-input input[type="submit"],
+  .form-input input[type="date"],
+  .form-input select,
   .form-input textarea {
     border-radius: 0.25rem;
     border-radius: var(--loginBorderRadus);
@@ -273,9 +275,10 @@ a {
   }
   
   .form-input input[type="password"],
-  .form-input input[type="date"],
   .form-input input[type="number"],
   .form-input input[type="text"],
+  .form-input input[type="date"],
+  .form-input select,
   .form-input textarea {
     background-color: #3b4148;
     background-color: var(--loginInputBackgroundColor);
@@ -285,12 +288,14 @@ a {
   
   .form-input input[type="password"]:focus,
   .form-input input[type="password"]:hover,
-  .form-input input[type="date"]:focus,
-  .form-input input[type="date"]:hover,
   .form-input input[type="number"]:focus,
   .form-input input[type="number"]:hover,
+  .form-input input[type="date"]:focus,
+  .form-input input[type="date"]:hover,
   .form-input input[type="text"]:focus,
   .form-input input[type="text"]:hover,
+  .form-input select:focus,
+  .form-input select:hover,
   .form-input textarea:focus, 
   .form-input textarea:hover {
     background-color: #434a52;
@@ -311,7 +316,7 @@ a {
     background-color: #d44179;
     background-color: var(--loginSubmitHoverBackgroundColor);
   }
-
+  
   /* modules/text.css */
   
   p {

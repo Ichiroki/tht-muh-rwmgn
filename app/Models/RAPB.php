@@ -12,7 +12,7 @@ class RAPB extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $useAutoIncrement = false;
-    protected $allowedFields    = ['id', 'activity_name', 'category', 'amount', 'year', 'description'];
+    protected $allowedFields    = ['id', 'activity_name', 'category', 'amount', 'used_amount', 'year', 'description'];
 
     // Dates
     protected $useTimestamps = true;

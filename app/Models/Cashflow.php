@@ -12,7 +12,7 @@ class Cashflow extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'unit_id', 'rapb_id', 'type', 'category', 'amount', 'information', 'date'];
+    protected $allowedFields    = ['id', 'unit_id', 'rapb_id', 'category', 'amount', 'information', 'date'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

@@ -24,10 +24,6 @@ class CashflowMigration extends Migration
                 'constraint' => 36,
                 'null' => true
             ],
-            'type' => [
-                'type' => 'ENUM',
-                'constraint' => ['pemasukan', 'pengeluaran']
-            ],
             'category' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255

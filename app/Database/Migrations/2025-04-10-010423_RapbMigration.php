@@ -19,7 +19,7 @@ class RapbMigration extends Migration
             ],
             'category' => [
                 'type' => 'ENUM',
-                'constraint' => ['pengeluaran', 'pemasukkan'],
+                'constraint' => ['pengeluaran', 'pemasukan'],
             ],
             'amount' => [
                 'type' => 'DECIMAL',

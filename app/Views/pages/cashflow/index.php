@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Home Test | RAPB</title>
+    <title>Take Home Test | Cashflow</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/pages/rapb.css">
@@ -34,25 +34,25 @@
                 <th>No</th>
                 <th>Unit</th>
                 <th>RAPB</th>
-                <th>Tipe</th>
                 <th>Kategori</th>
                 <th>Jumlah</th>
-                <th>Aksi</th>
+                <th>Tanggal</th>
             </tr>
-            <?php if(empty($rapb)) : ?>
+            <?php if(empty($cashflows)) : ?>
                 <p>Tidak ada data yang ditemukan.</p>
             <?php else :?>
                 <?php $no = 1; ?>
-                <?php foreach ($rapb as $r) : ?>
+                <?php foreach ($cashflows as $r) : ?>
                 <tr>
                     <td data-th="No"><?= $no++ ?></td>
-                    <td data-th="Nama Kegiatan"><?= esc($r['nama_kegiatan']) ?></td>
-                    <td data-th="Kategori"><?= esc($r['kategori']) ?></td>
-                    <td data-th="Anggaran"><?= number_format($r['anggaran'], 0, ',', '.') ?></td>
-                    <td data-th="Tahun"><?= esc($r['tahun']) ?></td>
+                    <td data-th="Nama Unit"><?= esc($r['unit_name']) ?></td>
+                    <td data-th="Nama Kegiatan"><?= esc($r['activity_name']) ?></td>
+                    <td data-th="Kategori"><?= esc($r['category']) ?></td>
+                    <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
+                    <td data-th="Tahun"><?= esc($r['date']) ?></td>
                     <td data-th="Aksi">
-                        <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
-                        <form action="/rapb/delete/<?= $r['id'] ?>" method="POST">
+                        <a href="/cashflow/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
+                        <form action="/cashflow/delete/<?= $r['id'] ?>" method="POST">
                             <?= csrf_field() ?>
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-red">Delete</button>

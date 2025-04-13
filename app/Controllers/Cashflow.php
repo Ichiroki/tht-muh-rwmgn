@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Cashflow as CashflowModel;
 use App\Models\RAPB;
+use App\Models\Unit;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Cashflow extends BaseController
@@ -24,9 +25,9 @@ class Cashflow extends BaseController
         $unitId = (int) $user['unit_id'];
 
         if($role === 'admin') {
-            $data['cashflow'] = $this->cashflowModel->getCashflowWithUnitAndRAPB();
+            $data['cashflows'] = $this->cashflowModel->getCashflowWithUnitAndRAPB();
         } else {
-            $data['cashflow'] = $this->cashflowModel->getCashflowWithUnitAndRAPB($unitId);
+            $data['cashflows'] = $this->cashflowModel->getCashflowWithUnitAndRAPB($unitId);
         }
 
         return view('pages/cashflow/index', $data);
@@ -34,54 +35,71 @@ class Cashflow extends BaseController
 
     public function create() 
     {
-        return view('pages/cashflow/create');
+        $unitModel = new Unit();
+        $rapbModel = new Rapb();
+
+        $data['units'] = $unitModel->findAll();
+        $data['rapbs'] = $rapbModel->findAll();
+
+        return view('pages/cashflow/create', $data);
     }
 
     public function store()
     {
         $data = $this->request->getPost();
-
+    
         $uuid = service('uuid');
         $id = $uuid->uuid4()->toString();
-
-        $data['id'] = $id;
+    
         $validation = \Config\Services::validation();
-
+    
         $validation->setRules([
+            'unit_id' => 'required',
             'rapb_id' => 'required',
-            'type' => 'required|in_list[pemasukan, pengeluaran]',
-            'category' => 'required',
-            'amount' => 'required|numeric',
+            'category' => 'required|in_list[pemasukan,pengeluaran]',
+            'amount' => 'required',
             'information' => 'permit_empty|string',
             'date' => 'required|valid_date'
         ]);
-
-        if(!$validation->withRequest($this->request)->run()) {
+    
+        if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
-
+    
         $user = session()->get();
-
+        $amount = str_replace(['Rp', '.'], '', $this->request->getPost('amount'));
+        $amount = (int) $amount;
+    
+        $rapbModel = new \App\Models\RAPB();
+        $rapb = $rapbModel->find($data['rapb_id']);
+    
+        if ($data['category'] === 'pengeluaran') {
+            if ($rapb['amount'] - $rapb['used_amount'] < $amount) {
+                return redirect()->back()->withInput()->with('error', 'Jumlah melebihi anggaran yang tersedia.');
+            }
+            // Tambahkan jumlah ke used_amount
+            $rapb['used_amount'] += $amount;
+        } else if ($data['category'] === 'pemasukan') {
+            // Misal pemasukan berarti mengurangi used_amount
+            $rapb['used_amount'] = max(0, $rapb['used_amount'] - $amount); // jangan sampai minus
+        }
+    
+        // Update RAPB
+        $rapbModel->update($rapb['id'], [
+            'used_amount' => $rapb['used_amount']
+        ]);
+    
+        // Simpan cashflow
         $this->cashflowModel->insert([
             'id' => $id,
             'unit_id' => $user['unit_id'],
-            'rapb_id' => $this->request->getPost('rapb_id'),
-            'type' => $this->request->getPost('type'),
-            'category' => $this->request->getPost('category'),
-            'amount' => $this->request->getPost('amount'),
-            'information' => $this->request->getPost('information'),
-            'date' => $this->request->getPost('date'),
+            'rapb_id' => $data['rapb_id'],
+            'category' => $data['category'],
+            'amount' => $amount,
+            'information' => $data['information'],
+            'date' => $data['date'],
         ]);
-
-        $rapbModel = new RAPB();
-        $rapb = $rapbModel->find($data['rapb_id']);
-
-        if($data['type'] === 'pengeluaran') {
-            $rapb['amount'] < $data['amount'] ? redirect()->back()->with('error', 'jumlah melebihi jumlah anggaran yang tersedia') : $rapb['used_amount'] -= $data['amount'];
-        } else if ($data['type'] === 'pemasukkan') {
-            $rapb['amount'] += $data['amount'];
-        }
-
+    
         return redirect()->to('/cashflow')->with('success', 'Bukti transaksi berhasil ditambahkan');
     }
 
@@ -98,9 +116,9 @@ class Cashflow extends BaseController
         $data = $this->request->getPost();
 
         $validation->setRules([
+            'unit_id'     => 'required',
             'rapb_id'     => 'required',
-            'type'        => 'required|in_list[pemasukan,pengeluaran]',
-            'category'    => 'required',
+            'category'    => 'required|in_list[pemasukan, pengeluaran]',
             'amount'      => 'required|numeric',
             'information' => 'permit_empty|string',
             'date'        => 'required|valid_date'
@@ -111,8 +129,8 @@ class Cashflow extends BaseController
         }
 
         $this->cashflowModel->update($id, [
+            'unit_id'     => $data['unit_id'],
             'rapb_id'     => $data['rapb_id'],
-            'type'        => $data['type'],
             'category'    => $data['category'],
             'amount'      => $data['amount'],
             'information' => $data['information'],
@@ -130,9 +148,9 @@ class Cashflow extends BaseController
         $rapbModel = new \App\Models\RapbModel();
         $rapb = $rapbModel->find($cashflow['rapb_id']);
 
-        if($cashflow['type'] === 'pengeluaran') {
+        if($cashflow['category'] === 'pengeluaran') {
             $rapb['used_amount'] += $cashflow['amount'];
-        } else if ($cashflow['type'] === 'pemasukan') {
+        } else if ($cashflow['category'] === 'pemasukan') {
             $rapb['amount'] -= $cashflow['amount'];
         }
 
