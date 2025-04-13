@@ -71,6 +71,10 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 Before you review this application, make sure you prepare for the requirement.
 
+# Database Structure
+
+[img]https://i.imgur.com/aTWf0ZK.png[/img]
+
 # Information Architecture
 
 - Beranda / Dashboard
