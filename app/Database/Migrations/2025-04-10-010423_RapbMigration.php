@@ -29,6 +29,10 @@ class RapbMigration extends Migration
                 'type' => 'DECIMAL',
                 'constraint' => '15.2'
             ],
+            'exact_amount' => [
+                'type' => 'DECIMAL',
+                'constraint' => '15.2'
+            ],
             'year' => [
                 'type' => 'INT',
             ],

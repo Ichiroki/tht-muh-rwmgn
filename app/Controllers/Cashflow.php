@@ -52,14 +52,13 @@ class Cashflow extends BaseController
         $id = $uuid->uuid4()->toString();
     
         $validation = \Config\Services::validation();
-    
         $validation->setRules([
             'unit_id' => 'required',
             'rapb_id' => 'required',
             'category' => 'required|in_list[pemasukan,pengeluaran]',
             'amount' => 'required',
             'information' => 'permit_empty|string',
-            'date' => 'required|valid_date'
+            'date' => 'required|valid_date',
         ]);
     
         if (!$validation->withRequest($this->request)->run()) {
@@ -67,29 +66,39 @@ class Cashflow extends BaseController
         }
     
         $user = session()->get();
-        $amount = str_replace(['Rp', '.'], '', $this->request->getPost('amount'));
-        $amount = (int) $amount;
+        $amount = (int) str_replace(['Rp', '.'], '', $data['amount']);
     
-        $rapbModel = new \App\Models\RAPB();
+        $rapbModel = new RAPB();
         $rapb = $rapbModel->find($data['rapb_id']);
+        $usedAmount = (int) $rapb['used_amount'];
+        $rapbAmount = (int) $rapb['amount'];
     
+        // Cek pengeluaran
         if ($data['category'] === 'pengeluaran') {
-            if ($rapb['amount'] - $rapb['used_amount'] < $amount) {
-                return redirect()->back()->withInput()->with('error', 'Jumlah melebihi anggaran yang tersedia.');
+            if ($rapbAmount < $amount) {
+                return redirect()->back()->withInput()->with('error', 'Jumlah melebihi anggaran tersedia.');
             }
-            // Tambahkan jumlah ke used_amount
-            $rapb['used_amount'] += $amount;
-        } else if ($data['category'] === 'pemasukan') {
-            // Misal pemasukan berarti mengurangi used_amount
-            $rapb['used_amount'] = max(0, $rapb['used_amount'] - $amount); // jangan sampai minus
+    
+            $newUsedAmount = $usedAmount + $amount;
+            $exactAmount = $rapbAmount - $newUsedAmount;
+    
+            $rapbModel->update($data['rapb_id'], [
+                'used_amount' => $newUsedAmount,
+                'exact_amount' => $exactAmount,
+            ]);
         }
     
-        // Update RAPB
-        $rapbModel->update($rapb['id'], [
-            'used_amount' => $rapb['used_amount']
-        ]);
+        // Cek pemasukan
+        if ($data['category'] === 'pemasukan') {
+            $newUsedAmount = $usedAmount + $amount;
+            $exactAmount = $rapbAmount + $amount;
     
-        // Simpan cashflow
+            $rapbModel->update($data['rapb_id'], [
+                'used_amount' => $newUsedAmount,
+                'exact_amount' => $exactAmount,
+            ]);
+        }
+    
         $this->cashflowModel->insert([
             'id' => $id,
             'unit_id' => $user['unit_id'],
@@ -142,18 +151,22 @@ class Cashflow extends BaseController
 
     public function delete($id)
     {
-        $this->cashflowModel->delete($id);
-        return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil dihapus!');
-
-        $rapbModel = new \App\Models\RapbModel();
+        $cashflow = $this->cashflowModel->find($id);
+        $rapbModel = new \App\Models\Rapb();
         $rapb = $rapbModel->find($cashflow['rapb_id']);
 
         if($cashflow['category'] === 'pengeluaran') {
             $rapb['used_amount'] += $cashflow['amount'];
+            $rapb['exact_amount'] = $rapb['amount'] + $rapb['used_amount'];
+            $rapbModel->save($rapb);
         } else if ($cashflow['category'] === 'pemasukan') {
             $rapb['amount'] -= $cashflow['amount'];
+            $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];
+            $rapbModel->save($rapb);
         }
 
-        $rapbModel->save($rapb);
+        $this->cashflowModel->delete($id);
+
+        return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil dihapus!');
     }
 }
