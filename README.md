@@ -214,12 +214,12 @@ This documentation describes the available API endpoints for the project.
 
 ### Create a Unit
 - **Endpoint**: `POST /api/units`
-- **Description**: Register a new user.
+- **Description**: Create a unit.
 
 #### Request Body:
 ```json
 {
-  "name": "New Unit",
+  "unit_name": "New Unit",
   "address": "Description of the new unit"
 }
 ```
@@ -227,18 +227,46 @@ This documentation describes the available API endpoints for the project.
 ### Response Body :
 ```json
 {
-  "message": "Unit created successfully."
+  "status": "success",
+  "data": "unit data"
 }
 ```
 
-### Logout
-- **Endpoint**: `POST /api/logout`
-- **Description**: Log out a user.
+### Edit a Unit
+- **Endpoint**: `PATCH /api/units`
+- **Description**: Edit a unit.
+
+#### Request Body:
+```json
+{
+  "unit_name": "New Unit",
+  "address": "Description of the new unit"
+}
+```
 
 ### Response Body :
 ```json
 {
   "status": "success",
-  "message": "Logout berhasil."
+  "data": "unit berhasil ditambahkan"
+}
+```
+
+### Delete a Unit
+- **Endpoint**: `Delete /api/units`
+- **Description**: Delete a unit.
+
+#### Request Body:
+```json
+{
+  "id": "unit_id",
+}
+```
+
+### Response Body :
+```json
+{
+  "status": "success",
+  "data": "unit berhasil dihapus"
 }
 ```
