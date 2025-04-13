@@ -158,7 +158,7 @@ This documentation describes the available API endpoints for the project.
 ```
 
 ### Register
-- **Endpoint**: POST /api/register
+- **Endpoint**: `POST /api/register`
 - **Description**: Register a new user.
 
 #### Request Body:
@@ -179,7 +179,60 @@ This documentation describes the available API endpoints for the project.
 ```
 
 ### Logout
-- **Endpoint**: POST /api/logout
+- **Endpoint**: `POST /api/logout`
+- **Description**: Log out a user.
+
+### Response Body :
+```json
+{
+  "status": "success",
+  "message": "Logout berhasil."
+}
+```
+
+### Header Endpoints
+
+### Get All Units
+- **Endpoint**: `GET /api/units`
+- **Description**: Retrieve a list of all units.
+
+### Response Body :
+```json
+[
+  {
+    "id": 1,
+    "name": "Unit A",
+    "description": "Description of Unit A"
+  },
+  {
+    "id": 2,
+    "name": "Unit B",
+    "description": "Description of Unit B"
+  }
+]
+```
+
+### Create a Unit
+- **Endpoint**: `POST /api/units`
+- **Description**: Register a new user.
+
+#### Request Body:
+```json
+{
+  "name": "New Unit",
+  "address": "Description of the new unit"
+}
+```
+
+### Response Body :
+```json
+{
+  "message": "Unit created successfully."
+}
+```
+
+### Logout
+- **Endpoint**: `POST /api/logout`
 - **Description**: Log out a user.
 
 ### Response Body :
