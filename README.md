@@ -73,7 +73,7 @@ Before you review this application, make sure you prepare for the requirement.
 
 # Database Structure
 
-[img]https://i.imgur.com/aTWf0ZK.png[/img]
+![alt text](https://i.imgur.com/aTWf0ZK.png)
 
 # Information Architecture
 
