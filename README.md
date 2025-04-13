@@ -74,3 +74,7 @@ this project have a custom command that will use for clearing session, etc (soon
 # 1. clear:session
 
 This command will clearing out all session, it is best for use in development mode, production mode should use cron job
+
+# 2. migrate:freseed
+
+This command will rollback your migration, migrating all tables and put seed on a few tables (need to create a seeder and then run the seeder in DatabaseSeeder.php)

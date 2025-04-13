@@ -81,5 +81,9 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->patch('edit/(:segment)', 'Cashflow::update/$1');
 
         $routes->delete('delete/(:segment)', 'Cashflow::delete/$1');
+
+        $routes->get('category', 'ChartController::getChartData');
+        $routes->get('month', 'ChartController::getChartByMonth');
+        $routes->get('unit', 'ChartController::getChartByUnit');
     });
 });

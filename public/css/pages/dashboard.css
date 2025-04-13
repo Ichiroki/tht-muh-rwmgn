@@ -12,18 +12,21 @@
     font-family: var(--font-poppins);
 }
 
+.wrap {
+    display: flex;
+}
+
 .dashboard {
     background: var(--dashboard-color);
     height: 100vh;
+    width: 100%;
+    padding: 1rem;
+
+    overflow-y: auto;
 }
 
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 250px;
+    width: 300px;
     background-color: var(--sidebar-color);
     color: #eee;
     padding: 20px;
@@ -92,4 +95,24 @@
             margin-left: 5px;
         }
     }
+}
+
+.chart-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    overflow: hidden;
+    background: white;
+    margin-bottom: 1rem;
+    width: 50%;
+  }
+
+  
+.card-header {
+    padding: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+}
+.card-body {
+    padding: 1rem;
 }
