@@ -67,7 +67,11 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
 
-# Custom Command
+## .env.development
+
+env is for global variable that will use for configuration in global based (setting database, application mode, etc). use this when you want to build with your own configuration by deleting the .development (from .env.development to .env).
+
+## Custom Command
 
 this project have a custom command that will use for clearing session, etc (soon i'll make another)
 
@@ -78,3 +82,7 @@ This command will clearing out all session, it is best for use in development mo
 # 2. migrate:freseed
 
 This command will rollback your migration, migrating all tables and put seed on a few tables (need to create a seeder and then run the seeder in DatabaseSeeder.php)
+
+# 3. deploy
+
+<span style="color: yellow; font-size: 1.5rem">(This command is still under experiment)</span> this command will help you to deploy your application into docker
