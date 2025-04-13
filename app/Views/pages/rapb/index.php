@@ -33,6 +33,9 @@
             <tr>
                 <th>No</th>
                 <th>Nama Kegiatan</th>
+                <?php if($isAdmin) : ?>
+                    <th>Unit</th>
+                <?php endif ?>
                 <th>Kategori</th>
                 <th>Anggaran</th>
                 <th>Tahun</th>
@@ -46,8 +49,11 @@
                 <tr>
                     <td data-th="No"><?= $no++ ?></td>
                     <td data-th="Nama Kegiatan"><?= esc($r['activity_name']) ?></td>
+                    <?php if($isAdmin) : ?>
+                        <td data-th="Unit"><?= esc(strtoupper($r['unit'])) ?></td>
+                    <?php endif ?>
                     <td data-th="Kategori"><?= esc(strtoupper($r['category'])) ?></td>
-                    <?php if($r['exact_amount'] === 0) : ?>
+                    <?php if($r['exact_amount'] === "0") : ?>
                         <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
                     <?php else :?>
                         <td data-th="Anggaran"><?= number_format($r['exact_amount'], 0, ',', '.') ?></td>

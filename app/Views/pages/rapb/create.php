@@ -36,6 +36,17 @@
                 <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
             <div class="form__field">
+                <label for="unit_id">
+                    <span>Unit</span>
+                </label>
+                <select name="unit_id" id="" class="form__input">
+                    <option value="">PIlih Unit</option>
+                    <?php foreach ($units as $unit) : ?>
+                        <option value=<?= $unit['id'] ?>><?= $unit['unit_name'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="form__field">
                 <label for="category">
                     <span>Kategori</span>
                 </label>

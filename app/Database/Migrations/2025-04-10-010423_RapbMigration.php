@@ -21,6 +21,12 @@ class RapbMigration extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['pengeluaran', 'pemasukan'],
             ],
+            'unit_id' => [
+                'type' => 'BIGINT',
+                'constraint' => 10,
+                'unsigned' => true,
+                'auto_increment' => true
+            ],
             'amount' => [
                 'type' => 'DECIMAL',
                 'constraint' => '15.2'
@@ -50,6 +56,7 @@ class RapbMigration extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('rapb_master');
     }
 
