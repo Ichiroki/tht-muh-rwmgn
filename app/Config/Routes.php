@@ -6,6 +6,58 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+$routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) {
+    // Auth - tidak perlu auth filter karena untuk login/register
+    $routes->post('login', 'API/Authentication::loginSystem');
+    $routes->post('register', 'API/Authentication::registerSystem');
+
+    $routes->group('', ['filter' => 'auth'], function($routes) {
+
+        // Logout
+        $routes->post('logout', 'API/Authentication::logoutSystem');
+
+        // Units
+        $routes->get('units', 'API/Units::index');
+        $routes->post('units', 'API/Units::store');
+        $routes->get('units/(:segment)', 'API/Units::show/$1');
+        $routes->put('units/(:segment)', 'API/Units::update/$1');
+        $routes->delete('units/(:segment)', 'API/Units::delete/$1');
+
+        // Users
+        $routes->get('users', 'API/Users::index');
+        $routes->post('users', 'API/Users::store');
+        $routes->get('users/(:segment)', 'API/Users::show/$1');
+        $routes->put('users/(:segment)', 'API/Users::update/$1');
+        $routes->delete('users/(:segment)', 'API/Users::delete/$1');
+
+        // Roles
+        $routes->get('roles', 'API/Roles::index');
+        $routes->post('roles', 'API/Roles::store');
+        $routes->get('roles/(:segment)', 'API/Roles::show/$1');
+        $routes->put('roles/(:segment)', 'API/Roles::update/$1');
+        $routes->delete('roles/(:segment)', 'API/Roles::delete/$1');
+
+        // RAPB
+        $routes->get('rapb', 'API/RAPB::index');
+        $routes->post('rapb', 'API/RAPB::store');
+        $routes->get('rapb/(:segment)', 'API/RAPB::show/$1');
+        $routes->put('rapb/(:segment)', 'API/RAPB::update/$1');
+        $routes->delete('rapb/(:segment)', 'API/RAPB::delete/$1');
+
+        // Cashflow
+        $routes->get('cashflow', 'API/Cashflow::index');
+        $routes->post('cashflow', 'API/Cashflow::store');
+        $routes->get('cashflow/(:segment)', 'API/Cashflow::show/$1');
+        $routes->put('cashflow/(:segment)', 'API/Cashflow::update/$1');
+        $routes->delete('cashflow/(:segment)', 'API/Cashflow::delete/$1');
+
+        // Chart routes
+        $routes->get('cashflow/chart/category', 'API/Chart::getChartData');
+        $routes->get('cashflow/chart/month', 'API/Chart::getChartByMonth');
+        $routes->get('cashflow/chart/unit', 'API/Chart::getChartByUnit');
+    });
+});
+
 $routes->group('/', ['filter' => 'guest'], function($routes) {
     $routes->group('login', static function($routes) {
         $routes->get('/', 'Authentication::login');

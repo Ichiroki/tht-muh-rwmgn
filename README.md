@@ -129,3 +129,63 @@ This command will rollback your migration, migrating all tables and put seed on 
 # 3. deploy
 
 (This command is still under experiment) this command will help you to deploy your application into docker
+
+# API Documentation
+
+This documentation describes the available API endpoints for the project.
+
+## Authentication
+
+### Login
+- **Endpoint**: `POST /api/login`
+- **Description**: Authenticate a user and return a JWT token.
+
+#### Request Body:
+```json
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Response Body :
+```json
+{
+  "status": "success",
+  "message": "Login Berhasil",
+  "user": ["id", "role", "unit_id"]
+}
+```
+
+### Register
+- **Endpoint**: POST /api/register
+- **Description**: Register a new user.
+
+#### Request Body:
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Response Body :
+```json
+{
+  "status": "success",
+  "message": "Register Berhasil. silakan Login"
+}
+```
+
+### Logout
+- **Endpoint**: POST /api/logout
+- **Description**: Log out a user.
+
+### Response Body :
+```json
+{
+  "status": "success",
+  "message": "Logout berhasil."
+}
+```
