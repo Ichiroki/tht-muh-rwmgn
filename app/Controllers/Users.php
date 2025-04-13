@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\User;
+use App\Models\Unit;
+use App\Models\Role;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Users extends BaseController
@@ -24,7 +26,12 @@ class Users extends BaseController
 
     public function create()
     {
-        return view('/pages/user/create');
+        $roles = new Role();
+        $units = new Unit();
+        $data['roles'] = $roles->findAll();
+        $data['units'] = $units->findAll();
+
+        return view('/pages/user/create', $data);
     }
 
     public function store()
@@ -38,7 +45,7 @@ class Users extends BaseController
             'last_name' => 'required|string',
             'email' => 'required|string|is_unique[users.email]',
             'password'  => 'required|string',
-            'unit_id' => 'required'
+            'unit_id' => 'required|'
         ]);
 
         if(!$validation->withRequest($this->request)->run()) {
@@ -46,11 +53,12 @@ class Users extends BaseController
         }
 
         $this->userModel->insert([
+            'id' => service('uuid')->uuid4()->toString(),
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => $data['password'],
-            'unit_id' => $data['unit_id'],
+            'password' => password_hash($data['password'], PASSWORD_ARGON2ID),
+            'unit_id' => (int) $data['unit_id'],
         ]);
 
         return redirect()->to('/users')->with('success', 'user berhasil bertambah');

@@ -16,8 +16,9 @@
         <span>Management</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="Users">Users</a>
-            <a href="Roles">Roles</a>
+            <a href="/users">Users</a>
+            <a href="/roles">Roles</a>
+            <a href="/units">Roles</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
@@ -26,9 +27,8 @@
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
-
     <main class="content">
-        <a href="/user/create" class="btn btn-green">Buat User Baru</a>
+        <a href="/users/create" class="btn btn-green">Buat User Baru</a>
         <table class="rwd-table">
             <tr>
                 <th>No</th>

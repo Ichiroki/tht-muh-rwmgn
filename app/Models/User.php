@@ -12,7 +12,7 @@ class User extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'first_name', 'last_name', 'email', 'password'];
+    protected $allowedFields    = ['id', 'first_name', 'last_name', 'email', 'password', 'unit_id', 'role'];
     
     // Dates
     protected $useTimestamps = false;

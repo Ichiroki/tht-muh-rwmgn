@@ -16,7 +16,7 @@
         <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="/user">Users</a>
+            <a href="/users">Users</a>
             <a href="/roles">Roles</a>
         </div>
         <a href="/rapb">RAPB</a>
@@ -27,66 +27,58 @@
     </div>
 
     <main class="content">
-        <form action="<?= site_url('user/create') ?>" method="POST" class="form form-input">
+        <form action="<?= site_url('users/create') ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
             <div class="form__field">
                 <label for="first_name">
                     <span>Nama Depan</span>
                 </label>
-                <input autocomplete="off" id="first_name" type="text" name="first_name" value="<?= old('first_name') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="first_name" type="text" name="first_name" value="<?= old('first_name') ?>" class="form__input" placeholder="Masukkan Nama Depan" required>
             </div>
 
             <div class="form__field">
                 <label for="last_name">
-                    <span>Nama Depan</span>
+                    <span>Nama Belakang</span>
                 </label>
-                <input autocomplete="off" id="last_name" type="text" name="last_name" value="<?= old('last_name') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="last_name" type="text" name="last_name" value="<?= old('last_name') ?>" class="form__input" placeholder="Masukkan Nama Belakang" required>
             </div>
 
             <div class="form__field">
                 <label for="email">
                     <span>Email</span>
                 </label>
-                <input autocomplete="off" id="email" type="text" name="email" value="<?= old('email') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="email" type="text" name="email" value="<?= old('email') ?>" class="form__input" placeholder="Masukkan Email" required>
             </div>
 
             <div class="form__field">
                 <label for="password">
                     <span>Password</span>
                 </label>
-                <input autocomplete="off" id="password" type="text" name="password" value="<?= old('password') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="password" type="password" name="password" value="<?= old('password') ?>" class="form__input" placeholder="Masukkan Password" required>
             </div>
 
             <div class="form__field">
                 <label for="unit_id">
-                    <span>Kategori</span>
+                    <span>Unit</span>
                 </label>
                 <select name="unit_id" id="" class="form__input">
-                    <option value="">PIlih kategori</option>
-                    <option value="pengeluaran">Pengeluaran</option>
-                    <option value="pemasukan">Pemasukan</option>
+                    <option value="">Pilih Unit</option>
+                    <?php foreach($units as $unit) : ?>
+                    <option value="<?= $unit['id'] ?>"><?= $unit['unit_name'] ?></option>
+                    <?php endforeach ?>
                 </select>
             </div>
 
             <div class="form__field">
-                <label for="amount">
-                    <span>Anggaran</span>
+                <label for="role">
+                    <span>Role</span>
                 </label>
-                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount') ?>" class="form__input" placeholder="Masukkan Anggaran" required>
-            </div>
-
-            <div class="form__field">
-                <label for="year">
-                    <span>Tahun</span>
-                </label>
-                <input autocomplete="off" id="year" type="number" min="1912" max="9999" name="year" value="<?= old('year') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
-            </div>
-
-            <div class="form__field">
-                <label for="description">
-                    <span>Deskripsi</span>
-                </label>
-                <textarea id="description" type="text" name="description" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('description')) ?></textarea>
+                <select name="role" id="" class="form__input">
+                    <option value="">Pilih role</option>
+                    <?php foreach($roles as $role) : ?>
+                    <option value="<?= $role['id'] ?>"><?= $role['role_name'] ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="form__field">
