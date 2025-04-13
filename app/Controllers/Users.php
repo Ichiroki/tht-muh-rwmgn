@@ -66,6 +66,11 @@ class Users extends BaseController
 
     public function edit($id)
     {
+        $roles = new Role();
+        $units = new Unit();
+        $data['roles'] = $roles->findAll();
+        $data['units'] = $units->findAll();
+        
         $data['user'] = $this->userModel->getUserWithRole($id);
         return view('/pages/user/edit', $data);
     }
@@ -93,9 +98,9 @@ class Users extends BaseController
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => $data['password'],
+            'password' => password_hash($data['password'], PASSWORD_ARGON2ID),
             'role' => $data['role'],
-            'unit_id' => $data['unit_id'],
+            'unit_id' => (int) $data['unit_id'],
         ]);
 
         return redirect()->to('/users')->with('success', 'user berhasil berubah');

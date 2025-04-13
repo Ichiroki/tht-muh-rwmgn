@@ -29,57 +29,57 @@
 
 
     <main class="content">
-        <form action=<?= site_url('isers/edit/'. $user['id']) ?> method="POST" class="form form-input">
+    <form action="<?= site_url('users/edit/' . $user['id']) ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
             <input type="hidden" name="_method" value="PATCH">
             <div class="form__field">
                 <label for="first_name">
                     <span>Nama Depan</span>
                 </label>
-                <input autocomplete="off" id="first_name" type="text" name="first_name" value="<?= old('first_name', $user['first_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="first_name" type="text" name="first_name" value="<?= old('first_name', $user['first_name']) ?>" class="form__input" placeholder="Masukkan Nama Depan" required>
             </div>
 
             <div class="form__field">
                 <label for="last_name">
                     <span>Nama Belakang</span>
                 </label>
-                <input autocomplete="off" id="last_name" type="text" name="last_name" value="<?= old('last_name', $user['last_name']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="last_name" type="text" name="last_name" value="<?= old('last_name', $user['last_name']) ?>" class="form__input" placeholder="Masukkan Nama Belakang" required>
             </div>
 
             <div class="form__field">
                 <label for="email">
                     <span>Email</span>
                 </label>
-                <input autocomplete="off" id="email" type="text" name="email" value="<?= old('email', $user['email']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="email" type="text" name="email" value="<?= old('email', $user['email']) ?>" class="form__input" placeholder="Masukkan Email" required>
             </div>
 
             <div class="form__field">
                 <label for="password">
                     <span>Password</span>
                 </label>
-                <input autocomplete="off" id="password" type="text" name="password" value="<?= old('password', $user['password']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="password" type="password" name="password" value="" class="form__input" placeholder="Masukkan Password" required>
             </div>
 
             <div class="form__field">
-                <label for="role">
-                    <span>Kategori</span>
+                <label for="unit_id">
+                    <span>Unit</span>
                 </label>
-                <select name="role" id="" class="form__input">
-                    <option value="">PIlih role</option>
-                    <?php foreach($roles as $role) : ?>
-                        <option value=<?= $role ?> <?= $role === $user['role'] ? "selected" : "" ?>><?= $role ?></option>
+                <select name="unit_id" id="" class="form__input">
+                    <option value="">Pilih Unit</option>
+                    <?php foreach($units as $unit) : ?>
+                    <option value="<?= $unit['id'] ?>" <?= $unit['id'] === $user['unit_id'] ? "selected" : "" ?>><?= $unit['unit_name'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
 
             <div class="form__field">
-                <label for="unit_id">
-                    <span>Amal Usaha</span>
+                <label for="role">
+                    <span>Role</span>
                 </label>
-                <select name="unit_id" id="" class="form__input">
-                    <option value="">PIlih amal usaha</option>
-                    <?php foreach($units as $unit) : ?>
-                        <option value=<?= $unit ?> <?= $unit === $user['unit'] ? "selected" : "" ?>><?= $unit ?></option>
+                <select name="role" id="" class="form__input">
+                    <option value="">Pilih role</option>
+                    <?php foreach($roles as $role) : ?>
+                    <option value="<?= $role['id'] ?>" <?= $role['id'] === $user['role'] ? "selected" : "" ?>><?= $role['role_name'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
