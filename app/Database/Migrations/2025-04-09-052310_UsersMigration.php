@@ -31,9 +31,9 @@ class Users extends Migration
                 'constraint' => '255'
             ],
             'role' => [
-                'type' => 'ENUM',
-                'constraint' => ['admin', 'pcm', 'unit', 'bendahara'],
-                'default' => 'unit'
+                'type' => 'BIGINT',
+                'constraint' => 100,
+                'default' => 2
             ],
             'unit_id' => [
                 'type' => 'BIGINT',
@@ -52,6 +52,7 @@ class Users extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('role', 'roles', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'SET NULL');
         $this->forge->createTable('users');
     }

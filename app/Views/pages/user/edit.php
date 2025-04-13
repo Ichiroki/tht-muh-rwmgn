@@ -33,42 +33,55 @@
             <?= csrf_field() ?>
             <input type="hidden" name="_method" value="PATCH">
             <div class="form__field">
-                <label for="activity_name">
-                    <span>Nama Kegiatan</span>
+                <label for="first_name">
+                    <span>Nama Depan</span>
                 </label>
-                <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name', $user['activity_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <input autocomplete="off" id="first_name" type="text" name="first_name" value="<?= old('first_name', $user['first_name']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
+
             <div class="form__field">
-                <label for="category">
+                <label for="last_name">
+                    <span>Nama Belakang</span>
+                </label>
+                <input autocomplete="off" id="last_name" type="text" name="last_name" value="<?= old('last_name', $user['last_name']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+            </div>
+
+            <div class="form__field">
+                <label for="email">
+                    <span>Email</span>
+                </label>
+                <input autocomplete="off" id="email" type="text" name="email" value="<?= old('email', $user['email']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+            </div>
+
+            <div class="form__field">
+                <label for="password">
+                    <span>Password</span>
+                </label>
+                <input autocomplete="off" id="password" type="text" name="password" value="<?= old('password', $user['password']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+            </div>
+
+            <div class="form__field">
+                <label for="role">
                     <span>Kategori</span>
                 </label>
-                <select name="category" id="" class="form__input">
-                    <option value="">PIlih kategori</option>
-                    <?php foreach($categories as $category) : ?>
-                        <option value=<?= $category ?> <?= $category === $user['category'] ? "selected" : "" ?>><?= $category ?></option>
+                <select name="role" id="" class="form__input">
+                    <option value="">PIlih role</option>
+                    <?php foreach($roles as $role) : ?>
+                        <option value=<?= $role ?> <?= $role === $user['role'] ? "selected" : "" ?>><?= $role ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
 
             <div class="form__field">
-                <label for="amount">
-                    <span>Anggaran</span>
+                <label for="unit_id">
+                    <span>Amal Usaha</span>
                 </label>
-                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= old('amount', $user['amount']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
-            </div>
-
-            <div class="form__field">
-                <label for="year">
-                    <span>Tahun</span>
-                </label>
-                <input autocomplete="off" id="year" type="number" min="1912" max="9999" name="year" value="<?= old('year', $user['year']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
-            </div>
-
-            <div class="form__field">
-                <label for="description">
-                    <span>Deskripsi</span>
-                </label>
-                <textarea id="description" name="description" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('description', $user['description'])) ?></textarea>
+                <select name="unit_id" id="" class="form__input">
+                    <option value="">PIlih amal usaha</option>
+                    <?php foreach($units as $unit) : ?>
+                        <option value=<?= $unit ?> <?= $unit === $user['unit'] ? "selected" : "" ?>><?= $unit ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="form__field">

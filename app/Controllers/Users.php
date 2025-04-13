@@ -18,7 +18,7 @@ class Users extends BaseController
 
     public function index()
     {
-        $data['users'] = $this->userModel->findAll();
+        $data['users'] = $this->userModel->getAllUserWithRoleAndUnit();
         return view('/pages/user/index', $data);
     }
 
@@ -58,7 +58,7 @@ class Users extends BaseController
 
     public function edit($id)
     {
-        $data['user'] = $this->userModel->find($id);
+        $data['user'] = $this->userModel->getUserWithRole($id);
         return view('/pages/user/edit', $data);
     }
 

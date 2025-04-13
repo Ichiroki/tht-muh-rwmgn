@@ -16,7 +16,8 @@ class RoleMigration extends Migration
             ],
             'role_name' => [
                 'type' => 'CHAR',
-                'constraint' => '25'
+                'constraint' => '25',
+                'unique' => true
             ]
         ]);
 

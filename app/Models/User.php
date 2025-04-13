@@ -20,4 +20,20 @@ class User extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    public function getUserWithRole($id = null) 
+    {
+        return $this->select('users.*, roles.role_name')
+        ->join('roles', 'roles.id = users.role')
+        ->where('users.id', $id)
+        ->first();
+    }
+
+    public function getAllUserWithRoleAndUnit() 
+    {
+        return $this->select('users.*, roles.role_name, units.unit_name', )
+        ->join('units', 'units.id = users.unit_id')
+        ->join('roles', 'roles.id = users.role')
+        ->findAll();
+    }
 }

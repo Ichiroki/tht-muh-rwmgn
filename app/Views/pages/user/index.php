@@ -48,8 +48,8 @@
                     <td data-th="Nama Depan"><?= esc($r['first_name']) ?></td>
                     <td data-th="Nama Belakang"><?= esc($r['last_name']) ?></td>
                     <td data-th="Email"><?= esc(strtoupper($r['email'])) ?></td>
-                    <td data-th="Unit"><?= esc(strtoupper($r['unit_id'])) ?></td>
-                    <td data-th="Role"><?= esc(strtoupper($r['role'])) ?></td>
+                    <td data-th="Unit"><?= esc(strtoupper($r['unit_name'])) ?></td>
+                    <td data-th="Role"><?= esc(strtoupper($r['role_name'])) ?></td>
                     <td data-th="Aksi">
                         <a href="/users/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
                         <form action="/users/delete/<?= $r['id'] ?>" method="POST">
