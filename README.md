@@ -67,7 +67,46 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
 
-## .env.development
+## How to run this application
+
+Before you review this application, make sure you prepare for the requirement.
+
+# Information Architecture
+
+- Beranda / Dashboard
+  - Ringkasan Cashflow
+  - Grafik Visualisasi (Bulan, Kategori, Unit)
+
+- Cashflow
+  - Lihat Semua Transaksi
+  - Tambah Transaksi
+  - Edit / Hapus Transaksi
+
+- RAPB (Rencana Anggaran)
+  - Lihat RAPB per Unit
+  - Tambah RAPB
+  - Edit / Hapus RAPB
+
+- User Management (Admin)
+  - Daftar User
+  - Tambah / Edit User
+  - Role & Unit Assignment
+
+- Autentikasi
+  - Login / Logout
+
+# Requirement
+
+> - PHP (get from laragon, xampp, or any web server platform you'd like)
+> - Composer (get the latest version, or else you can't run this application)
+
+# how to run this application ?
+
+make it simple, open your terminal you can use visual studio code, etc. if you using command prompt, you need to direct the folder target with cd command (ex  "cd D:/[your folder]" ). 
+
+Then run "composer install", wait until the vendor folder shows and wait until every package installment complete. After that, run local server by using php spark serve. and that's it, you're done. Thanks for reading this.
+
+# .env.development
 
 env is for global variable that will use for configuration in global based (setting database, application mode, etc). use this when you want to build with your own configuration by deleting the .development (from .env.development to .env).
 
@@ -85,4 +124,4 @@ This command will rollback your migration, migrating all tables and put seed on 
 
 # 3. deploy
 
-<span style="color: yellow; font-size: 1.5rem">(This command is still under experiment)</span> this command will help you to deploy your application into docker
+(This command is still under experiment) this command will help you to deploy your application into docker
