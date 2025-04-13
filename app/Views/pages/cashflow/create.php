@@ -18,6 +18,7 @@
         <div class="dropdown" id="management-dropdown">
             <a href="/users">Users</a>
             <a href="/roles">Roles</a>
+            <a href="/units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>

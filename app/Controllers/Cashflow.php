@@ -26,8 +26,10 @@ class Cashflow extends BaseController
 
         if($role === 'admin') {
             $data['cashflows'] = $this->cashflowModel->getCashflowWithUnitAndRAPB();
+            $data['isAdmin'] = true;
         } else {
             $data['cashflows'] = $this->cashflowModel->getCashflowWithUnitAndRAPB($unitId);
+            $data['isAdmin'] = false;
         }
 
         return view('pages/cashflow/index', $data);

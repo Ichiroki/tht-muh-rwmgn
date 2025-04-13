@@ -26,12 +26,13 @@ class Cashflow extends Model
 
     public function getCashflowWithUnitAndRAPB($unitId = null) {
         $builder = $this->select('cashflows.*, units.unit_name, rapb_master.activity_name')
-        ->join('units', 'units.id = cashflows.unit_id')
-        ->join('rapb_master', 'rapb_master.id = cashflows.rapb_id');
-        
-        if($unitId !== null) {
-            return $builder->findAll();
+            ->join('units', 'units.id = cashflows.unit_id')
+            ->join('rapb_master', 'rapb_master.id = cashflows.rapb_id');
+    
+        if ($unitId !== null) {
+            $builder->where('cashflows.unit_id', $unitId);
         }
-        return $builder->where('cashflows.unit_id', $unitId);
+    
+        return $builder->findAll();
     }
 }

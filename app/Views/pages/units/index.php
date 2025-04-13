@@ -16,9 +16,9 @@
         <span>Manajemen</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="users">Users</a>
-            <a href="roles">Roles</a>
-            <a href="units">Units</a>
+            <a href="/users">Users</a>
+            <a href="/roles">Roles</a>
+            <a href="/units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
@@ -26,7 +26,6 @@
         <a href="#">Tata Cara</a>
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
-
 
     <main class="content">
         <a href="/units/create" class="btn btn-green">Buat Unit Baru</a>

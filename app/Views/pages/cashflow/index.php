@@ -16,8 +16,9 @@
         <span>Management</span>
         <i class="fa fa-chevron-down"></i></button>
         <div class="dropdown" id="management-dropdown">
-            <a href="Users">Users</a>
-            <a href="Roles">Roles</a>
+            <a href="/users">Users</a>
+            <a href="/roles">Roles</a>
+            <a href="/units">Units</a>
         </div>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
@@ -32,7 +33,9 @@
         <table class="rwd-table">
             <tr>
                 <th>No</th>
-                <th>Unit</th>
+                <?php if($isAdmin) : ?>
+                    <th>Unit</th>
+                <?php endif ?>
                 <th>RAPB</th>
                 <th>Kategori</th>
                 <th>Jumlah</th>
@@ -45,7 +48,9 @@
                 <?php foreach ($cashflows as $r) : ?>
                 <tr>
                     <td data-th="No"><?= $no++ ?></td>
-                    <td data-th="Nama Unit"><?= esc($r['unit_name']) ?></td>
+                    <?php if($isAdmin) : ?>
+                        <td data-th="Nama Unit"><?= esc($r['unit_name']) ?></td>
+                    <?php endif ?>
                     <td data-th="Nama Kegiatan"><?= esc($r['activity_name']) ?></td>
                     <td data-th="Kategori"><?= esc($r['category']) ?></td>
                     <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
