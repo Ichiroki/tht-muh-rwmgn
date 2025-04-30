@@ -75,15 +75,15 @@ class Cashflow extends BaseController
         $usedAmount = (int) $rapb['used_amount'];
         $rapbAmount = (int) $rapb['amount'];
     
-        // Cek pengeluaran
         if ($data['category'] === 'pengeluaran') {
-            if ($rapbAmount < $amount) {
+            $newUsedAmount = $usedAmount + $amount;
+        
+            if ($newUsedAmount > $rapbAmount) {
                 return redirect()->back()->withInput()->with('error', 'Jumlah melebihi anggaran tersedia.');
             }
-    
-            $newUsedAmount = $usedAmount + $amount;
+        
             $exactAmount = $rapbAmount - $newUsedAmount;
-    
+        
             $rapbModel->update($data['rapb_id'], [
                 'used_amount' => $newUsedAmount,
                 'exact_amount' => $exactAmount,
@@ -92,7 +92,7 @@ class Cashflow extends BaseController
     
         // Cek pemasukan
         if ($data['category'] === 'pemasukan') {
-            $newUsedAmount = $usedAmount + $amount;
+            $newUsedAmount = $usedAmount - $amount;
             $exactAmount = $rapbAmount + $amount;
     
             $rapbModel->update($data['rapb_id'], [
@@ -156,19 +156,23 @@ class Cashflow extends BaseController
         $cashflow = $this->cashflowModel->find($id);
         $rapbModel = new \App\Models\Rapb();
         $rapb = $rapbModel->find($cashflow['rapb_id']);
-
-        if($cashflow['category'] === 'pengeluaran') {
-            $rapb['used_amount'] += $cashflow['amount'];
-            $rapb['exact_amount'] = $rapb['amount'] + $rapb['used_amount'];
-            $rapbModel->save($rapb);
-        } else if ($cashflow['category'] === 'pemasukan') {
-            $rapb['amount'] -= $cashflow['amount'];
+    
+        if ($cashflow['category'] === 'pengeluaran') {
+            // Kembalikan nilai used_amount dan exact_amount
+            $rapb['used_amount'] -= $cashflow['amount'];
             $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];
-            $rapbModel->save($rapb);
+    
+        } elseif ($cashflow['category'] === 'pemasukan') {
+            // Kurangi amount karena pemasukan sebelumnya menambah total anggaran
+            $rapb['amount'] -= $cashflow['amount'];
+            $rapb['used_amount'] -= $cashflow['amount'];
+            $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];
         }
-
+    
+        $rapbModel->save($rapb);
         $this->cashflowModel->delete($id);
-
+    
         return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil dihapus!');
     }
+    
 }

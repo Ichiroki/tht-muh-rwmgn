@@ -37,7 +37,8 @@
                     <th>Unit</th>
                 <?php endif ?>
                 <th>Kategori</th>
-                <th>Anggaran</th>
+                <th>Anggaran Awal</th>
+                <th>Anggaran Akhir</th>
                 <th>Tahun</th>
                 <th>Aksi</th>
             </tr>
@@ -53,11 +54,8 @@
                         <td data-th="Unit"><?= esc(strtoupper($r['unit'])) ?></td>
                     <?php endif ?>
                     <td data-th="Kategori"><?= esc(strtoupper($r['category'])) ?></td>
-                    <?php if($r['exact_amount'] === "0") : ?>
-                        <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
-                    <?php else :?>
-                        <td data-th="Anggaran"><?= number_format($r['exact_amount'], 0, ',', '.') ?></td>
-                    <?php endif ?>
+                    <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
+                    <td data-th="Anggaran"><?= number_format($r['exact_amount'], 0, ',', '.') ?></td>
                     <td data-th="Tahun"><?= esc($r['year']) ?></td>
                     <td data-th="Aksi">
                         <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
