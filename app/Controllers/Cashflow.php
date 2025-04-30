@@ -158,12 +158,10 @@ class Cashflow extends BaseController
         $rapb = $rapbModel->find($cashflow['rapb_id']);
     
         if ($cashflow['category'] === 'pengeluaran') {
-            // Kembalikan nilai used_amount dan exact_amount
             $rapb['used_amount'] -= $cashflow['amount'];
             $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];
     
         } elseif ($cashflow['category'] === 'pemasukan') {
-            // Kurangi amount karena pemasukan sebelumnya menambah total anggaran
             $rapb['amount'] -= $cashflow['amount'];
             $rapb['used_amount'] -= $cashflow['amount'];
             $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];

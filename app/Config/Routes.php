@@ -6,55 +6,55 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) {
+$routes->group('api', ['namespace' => 'App\Controllers\Api\API'], function($routes) {
     // Auth - tidak perlu auth filter karena untuk login/register
-    $routes->post('login', 'API/Authentication::loginSystem');
-    $routes->post('register', 'API/Authentication::registerSystem');
+    $routes->post('login', 'Authentication::loginSystem');
+    $routes->post('register', 'Authentication::registerSystem');
 
     $routes->group('', ['filter' => 'auth'], function($routes) {
 
         // Logout
-        $routes->post('logout', 'API/Authentication::logoutSystem');
+        $routes->post('logout', 'Authentication::logoutSystem');
 
         // Units
-        $routes->get('units', 'API/Units::index');
-        $routes->post('units', 'API/Units::store');
-        $routes->get('units/(:segment)', 'API/Units::show/$1');
-        $routes->put('units/(:segment)', 'API/Units::update/$1');
-        $routes->delete('units/(:segment)', 'API/Units::delete/$1');
+        $routes->get('units', 'Units::index');
+        $routes->post('units', 'Units::store');
+        $routes->get('units/(:segment)', 'Units::show/$1');
+        $routes->put('units/(:segment)', 'Units::update/$1');
+        $routes->delete('units/(:segment)', 'Units::delete/$1');
 
         // Users
-        $routes->get('users', 'API/Users::index');
-        $routes->post('users', 'API/Users::store');
-        $routes->get('users/(:segment)', 'API/Users::show/$1');
-        $routes->put('users/(:segment)', 'API/Users::update/$1');
-        $routes->delete('users/(:segment)', 'API/Users::delete/$1');
+        $routes->get('users', 'Users::index');
+        $routes->post('users', 'Users::store');
+        $routes->get('users/(:segment)', 'Users::show/$1');
+        $routes->put('users/(:segment)', 'Users::update/$1');
+        $routes->delete('users/(:segment)', 'Users::delete/$1');
 
         // Roles
-        $routes->get('roles', 'API/Roles::index');
-        $routes->post('roles', 'API/Roles::store');
-        $routes->get('roles/(:segment)', 'API/Roles::show/$1');
-        $routes->put('roles/(:segment)', 'API/Roles::update/$1');
-        $routes->delete('roles/(:segment)', 'API/Roles::delete/$1');
+        $routes->get('roles', 'Roles::index');
+        $routes->post('roles', 'Roles::store');
+        $routes->get('roles/(:segment)', 'Roles::show/$1');
+        $routes->put('roles/(:segment)', 'Roles::update/$1');
+        $routes->delete('roles/(:segment)', 'Roles::delete/$1');
 
         // RAPB
-        $routes->get('rapb', 'API/RAPB::index');
-        $routes->post('rapb', 'API/RAPB::store');
-        $routes->get('rapb/(:segment)', 'API/RAPB::show/$1');
-        $routes->put('rapb/(:segment)', 'API/RAPB::update/$1');
-        $routes->delete('rapb/(:segment)', 'API/RAPB::delete/$1');
+        $routes->get('rapb', 'RAPB::index');
+        $routes->post('rapb', 'RAPB::store');
+        $routes->get('rapb/(:segment)', 'RAPB::show/$1');
+        $routes->put('rapb/(:segment)', 'RAPB::update/$1');
+        $routes->delete('rapb/(:segment)', 'RAPB::delete/$1');
 
         // Cashflow
-        $routes->get('cashflow', 'API/Cashflow::index');
-        $routes->post('cashflow', 'API/Cashflow::store');
-        $routes->get('cashflow/(:segment)', 'API/Cashflow::show/$1');
-        $routes->put('cashflow/(:segment)', 'API/Cashflow::update/$1');
-        $routes->delete('cashflow/(:segment)', 'API/Cashflow::delete/$1');
+        $routes->get('cashflow', 'Cashflow::index');
+        $routes->post('cashflow', 'Cashflow::store');
+        $routes->get('cashflow/(:segment)', 'Cashflow::show/$1');
+        $routes->put('cashflow/(:segment)', 'Cashflow::update/$1');
+        $routes->delete('cashflow/(:segment)', 'Cashflow::delete/$1');
 
         // Chart routes
-        $routes->get('cashflow/chart/category', 'API/Chart::getChartData');
-        $routes->get('cashflow/chart/month', 'API/Chart::getChartByMonth');
-        $routes->get('cashflow/chart/unit', 'API/Chart::getChartByUnit');
+        $routes->get('cashflow/chart/category', 'Chart::getChartData');
+        $routes->get('cashflow/chart/month', 'Chart::getChartByMonth');
+        $routes->get('cashflow/chart/unit', 'Chart::getChartByUnit');
     });
 });
 
@@ -74,6 +74,13 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Pages::dashboard');
 
     $routes->get('logout', 'Authentication::logoutSystem');
+
+    $routes->group('/tata-cara', function($routes) {
+        $routes->get('/', 'Howto::index');
+
+        $routes->get('apa-itu-rapb', "Howto::whatIsRAPB");
+        $routes->get('cara-kerja-rapb', "Howto::howDoesRAPBWork");
+    });
 
     $routes->group('/units', function($routes) {
         $routes->get('/', 'Units::index');
