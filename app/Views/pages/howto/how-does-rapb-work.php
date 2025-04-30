@@ -36,8 +36,9 @@
                 <span>RAPB</span>
                 <i class="fa fa-chevron-down"></i></button>
                 <div class="dropdown" id="rapb-dropdown">
-                    <a href="roles">Apa Itu RAPB</a>
-                    <a href="units">Cara Kerja RAPB</a>
+                    <a href="/tata-cara/apa-itu-rapb">Apa Itu RAPB</a>
+                    <a href="/tata-cara/cara-kerja-rapb">Cara Kerja RAPB</a>
+                    <a href="/tata-cara/bekerja-dengan-rapb">Bekerja dengan RAPB</a>
                 </div>
                 <button type="button" class="dropdown-btn" onclick="toggleDropdown('cashflow-dropdown')">
                 <span>Cashflow</span>

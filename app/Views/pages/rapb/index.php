@@ -57,8 +57,8 @@
                     <td data-th="Anggaran"><?= number_format($r['amount'], 0, ',', '.') ?></td>
                     <td data-th="Anggaran"><?= number_format($r['exact_amount'], 0, ',', '.') ?></td>
                     <td data-th="Tahun"><?= esc($r['year']) ?></td>
-                    <td data-th="Aksi">
-                        <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-blue">Edit</a>
+                    <td data-th="Aksi" class="aksi">
+                        <a href="/rapb/edit/<?= $r['id'] ?>" class="btn btn-yellow">Edit</a>
                         <form action="/rapb/delete/<?= $r['id'] ?>" method="POST">
                             <?= csrf_field() ?>
                             <input type="hidden" name="_method" value="DELETE">

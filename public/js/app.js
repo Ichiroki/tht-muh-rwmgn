@@ -4,6 +4,12 @@ const toggleDropdown = (id) => {
     dropdown.style.display = dropdown.style.display === "flex" ? 'none' : 'flex'
 }
 
+const toggleAccordion = (id) => {
+    const accordion = document.getElementById(id)
+    accordion.style.display = accordion.style.display === "block" ? 'none' : 'block'
+    // document.querySelector('.fa .fa-chevron-right').style.rotate = '60deg'
+}
+
 // Input Amount
 const inputAmount = document.getElementById('amount')
 

@@ -21,4 +21,9 @@ class Howto extends BaseController
     {
         return view('pages/howto/how-does-rapb-work.php');
     }
+
+    public function workWithRAPB()
+    {
+        return view('pages/howto/work-with-rapb.php');
+    }
 }

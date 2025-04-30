@@ -393,6 +393,12 @@ a {
   color: #dd5;
 }
 
+.aksi {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* Utils */
 
 .btn {
@@ -417,6 +423,7 @@ a {
 
     &.btn-yellow {
         background-color: yellow;
+        color: #333;
     }
 
     &.btn-red {

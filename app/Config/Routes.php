@@ -80,6 +80,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
         $routes->get('apa-itu-rapb', "Howto::whatIsRAPB");
         $routes->get('cara-kerja-rapb', "Howto::howDoesRAPBWork");
+        $routes->get('bekerja-dengan-rapb', "Howto::workWithRAPB");
     });
 
     $routes->group('/units', function($routes) {
