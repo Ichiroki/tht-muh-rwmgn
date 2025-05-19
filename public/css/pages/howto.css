@@ -60,8 +60,10 @@
     background-color: var(--sidebar-color);
     color: #eee;
     padding: 20px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
 
     overflow-x: auto;

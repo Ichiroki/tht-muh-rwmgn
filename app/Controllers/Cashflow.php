@@ -47,8 +47,6 @@ class Cashflow extends BaseController
             $data['rapbs'] = $rapbModel->findAll();
         } else {
             $data['rapbs'] = $rapbModel->where('unit_id', $user_unit_id)->findAll();
-            var_dump($data['rapbs']);
-            die;
         }
         $data['units'] = $unitModel->findAll();
 

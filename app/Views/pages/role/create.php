@@ -26,7 +26,7 @@
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
         <a href="/settings">Settings</a>
-        <a href="#">Tata Cara</a>
+        <a href="/tata-cara">Tata Cara</a>
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 

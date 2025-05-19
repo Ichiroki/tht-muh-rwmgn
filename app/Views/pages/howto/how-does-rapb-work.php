@@ -11,43 +11,48 @@
 </head>
 <body>
     <section class="wrap">
-        <aside class="sidebar">
-            <h2>Tata Cara</h2>
-            <button type="button" class="dropdown-btn" onclick="toggleDropdown('autentikasi-dropdown')">
-            <span>Autentikasi</span>
-            <i class="fa fa-chevron-down"></i></button>
-            <div class="dropdown" id="autentikasi-dropdown">
-                <a href="users">Login</a>
-                <a href="roles">Register</a>
-            </div>
-            <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-            <span>Manajemen Aplikasi</span>
-            <i class="fa fa-chevron-down"></i></button>
-            <div class="dropdown" id="management-dropdown">
-                <a href="users">Users</a>
-                <a href="roles">Roles</a>
-                <a href="units">Units</a>
-            </div>
-            <button type="button" class="dropdown-btn" onclick="toggleDropdown('keuangan-dropdown')">
-            <span>Keuangan & Transaksi</span>
-            <i class="fa fa-chevron-down"></i></button>
-            <div class="dropdown" id="keuangan-dropdown">
-                <button type="button" class="dropdown-btn" onclick="toggleDropdown('rapb-dropdown')">
-                <span>RAPB</span>
+    <aside class="sidebar">
+            <div>
+                <h2>Tata Cara</h2>
+                <button type="button" class="dropdown-btn" onclick="toggleDropdown('autentikasi-dropdown')">
+                <span>Autentikasi</span>
                 <i class="fa fa-chevron-down"></i></button>
-                <div class="dropdown" id="rapb-dropdown">
-                    <a href="/tata-cara/apa-itu-rapb">Apa Itu RAPB</a>
-                    <a href="/tata-cara/cara-kerja-rapb">Cara Kerja RAPB</a>
-                    <a href="/tata-cara/bekerja-dengan-rapb">Bekerja dengan RAPB</a>
+                <div class="dropdown" id="autentikasi-dropdown">
+                    <a href="users">Login</a>
+                    <a href="roles">Register</a>
                 </div>
-                <button type="button" class="dropdown-btn" onclick="toggleDropdown('cashflow-dropdown')">
-                <span>Cashflow</span>
+                <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
+                <span>Manajemen Aplikasi</span>
                 <i class="fa fa-chevron-down"></i></button>
-                <div class="dropdown" id="cashflow-dropdown">
-                    <a href="roles">Apa Itu Cashflow</a>
-                    <a href="units">Cara Kerja Cashflow</a>
-                    <a href="units">Cara menggunakan fitur ini</a>
+                <div class="dropdown" id="management-dropdown">
+                    <a href="users">Users</a>
+                    <a href="roles">Roles</a>
+                    <a href="units">Units</a>
                 </div>
+                <button type="button" class="dropdown-btn" onclick="toggleDropdown('keuangan-dropdown')">
+                <span>Keuangan & Transaksi</span>
+                <i class="fa fa-chevron-down"></i></button>
+                <div class="dropdown" id="keuangan-dropdown">
+                    <button type="button" class="dropdown-btn" onclick="toggleDropdown('rapb-dropdown')">
+                    <span>RAPB</span>
+                    <i class="fa fa-chevron-down"></i></button>
+                    <div class="dropdown" id="rapb-dropdown">
+                        <a href="/tata-cara/apa-itu-rapb">Apa Itu RAPB</a>
+                        <a href="/tata-cara/cara-kerja-rapb">Cara Kerja RAPB</a>
+                        <a href="/tata-cara/bekerja-dengan-rapb">Bekerja Dengan RAPB</a>
+                    </div>
+                    <button type="button" class="dropdown-btn" onclick="toggleDropdown('cashflow-dropdown')">
+                    <span>Cashflow</span>
+                    <i class="fa fa-chevron-down"></i></button>
+                    <div class="dropdown" id="cashflow-dropdown">
+                        <a href="roles">Apa Itu Cashflow</a>
+                        <a href="units">Cara Kerja Cashflow</a>
+                        <a href="units">Cara menggunakan fitur ini</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="/">< Kembali Ke Dashboard</a>
             </div>
         </aside>
     
