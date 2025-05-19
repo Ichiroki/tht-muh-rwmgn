@@ -12,14 +12,16 @@
     <div class="sidebar">
         <h2>Menu</h2>
         <a href="/">Dashboard</a>
-        <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-        <span>Management</span>
-        <i class="fa fa-chevron-down"></i></button>
-        <div class="dropdown" id="management-dropdown">
-            <a href="/users">Users</a>
-            <a href="/roles">Roles</a>
-            <a href="/units">Units</a>
-        </div>
+        <?php if(session('role') === "admin") : ?>
+            <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
+            <span>Management</span>
+            <i class="fa fa-chevron-down"></i></button>
+            <div class="dropdown" id="management-dropdown">
+                <a href="/users">Users</a>
+                <a href="/roles">Roles</a>
+                <a href="/units">Units</a>
+            </div>
+        <?php endif; ?>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
         <a href="/settings">Settings</a>
@@ -37,7 +39,12 @@
                 <select name="unit_id" id="" class="form__input">
                     <option value="">Pilih Unit</option>
                     <?php foreach($units as $unit) : ?>
-                    <option value="<?= $unit['id'] ?>"><?= $unit['unit_name'] ?></option>
+                        <?php if(session('role') === 'admin') : ?>
+                            <option value="<?= $unit['id'] ?>"><?= $unit['unit_name'] ?></option>
+                        <?php else : ?>
+                            <option value="<?= $unit['id'] ?>" 
+                            <?= session('unit_id') === $unit['id'] ? "selected" : "" ?>><?= $unit['unit_name'] ?></option>
+                        <?php endif; ?>
                     <?php endforeach ?>
                 </select>
             </div>

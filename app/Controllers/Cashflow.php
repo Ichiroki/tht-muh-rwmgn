@@ -37,11 +37,20 @@ class Cashflow extends BaseController
 
     public function create() 
     {
+        $user = session()->get();
+        $user_unit_id = $user['unit_id'];
+
         $unitModel = new Unit();
         $rapbModel = new Rapb();
 
+        if($user['role'] === 'admin') {
+            $data['rapbs'] = $rapbModel->findAll();
+        } else {
+            $data['rapbs'] = $rapbModel->where('unit_id', $user_unit_id)->findAll();
+            var_dump($data['rapbs']);
+            die;
+        }
         $data['units'] = $unitModel->findAll();
-        $data['rapbs'] = $rapbModel->findAll();
 
         return view('pages/cashflow/create', $data);
     }

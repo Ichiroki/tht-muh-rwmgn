@@ -12,18 +12,20 @@
     <div class="sidebar">
         <h2>Menu</h2>
         <a href="/">Dashboard</a>
-        <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
-        <span>Management</span>
-        <i class="fa fa-chevron-down"></i></button>
-        <div class="dropdown" id="management-dropdown">
-            <a href="/users">Users</a>
-            <a href="/roles">Roles</a>
-            <a href="/units">Units</a>
-        </div>
+        <?php if(session('role') === "admin") : ?>
+            <button type="button" class="dropdown-btn" onclick="toggleDropdown('management-dropdown')">
+            <span>Management</span>
+            <i class="fa fa-chevron-down"></i></button>
+            <div class="dropdown" id="management-dropdown">
+                <a href="/users">Users</a>
+                <a href="/roles">Roles</a>
+                <a href="/units">Units</a>
+            </div>
+        <?php endif; ?>
         <a href="/rapb">RAPB</a>
         <a href="/cashflow">Cashflow</a>
         <a href="/settings">Settings</a>
-        <a href="#">Tata Cara</a>
+        <a href="/how-to">Tata Cara</a>
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
