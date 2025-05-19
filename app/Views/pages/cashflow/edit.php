@@ -6,7 +6,7 @@
     <title>Take Home Test | RAPB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/pages/rapb.css">
+    <link rel="stylesheet" href="/css/pages/cashflow.css">
 </head>
 <body>
     <div class="sidebar">
@@ -29,42 +29,81 @@
         <a href="<?= site_url('logout') ?>">Logout</a>
     </div>
 
-
     <main class="content">
-        <form action=<?= site_url('rapb/edit/'. $rapb['id']) ?> method="POST" class="form login">
+        <form action="<?= site_url('cashflow/edit/' . $cashflow['id']) ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
-            <div class="form__field">
-                <label for="email">
-                    <span>Nama Kegiatan</span>
+            <input type="hidden" name="_method" value="PATCH">
+            <div class="form__field" style="<?= session('role') === 'admin' ? 'display: block;' : 'display: none;' ?>">
+                <label for="unit_id">
+                    <span>Unit</span>
                 </label>
-                <input autocomplete="off" id="nama_kegiatan" type="text" name="nama_kegiatan" value="<?= old('nama_kegiatan', $rapb['nama_kegiatan']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
+                <select name="unit_id" id="" class="form__input">
+                    <option value="">Pilih Unit</option>
+                    <?php foreach($units as $unit) : ?>
+                        <?php if(session('role') === 'admin') : ?>
+                            <option value="<?= $unit['id'] ?>"><?= $unit['unit_name'] ?></option>
+                        <?php else : ?>
+                            <option value="<?= $unit['id'] ?>" 
+                            <?= session('unit_id') === $unit['id'] ? "selected" : "" ?>><?= $unit['unit_name'] ?></option>
+                        <?php endif; ?>
+                    <?php endforeach ?>
+                </select>
             </div>
             <div class="form__field">
-                <label for="kategori">
+                <label for="rapb_id">
+                    <span>RAPB</span>
+                </label>
+                <select name="rapb_id" id="" class="form__input">
+                    <option value="">Pilih RAPB</option>
+                    <?php foreach($rapbs as $rapb) : ?>
+                    <option value="<?= $rapb['id'] ?>" <?= $cashflow['rapb_id'] === $rapb['id'] ? "selected" : "" ?> ><?= $rapb['activity_name'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <?php if (session()->getFlashdata('errors')): ?>
+                <div class="alert alert-danger" style="color: red;">
+                    <ul>
+                        <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                            <li><?= esc($error) ?></li>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+            <?php endif ?>
+            <div class="form__field">
+                <label for="category">
                     <span>Kategori</span>
                 </label>
-                <input autocomplete="off" id="kategori" type="text" name="kategori" value="<?= old('kategori', $rapb['kategori']) ?>" class="form__input" placeholder="Masukkan kategori" required>
+                <select name="category" id="" class="form__input">
+                    <option value="">Pilih Kategori</option>
+                    <?php if($cashflow['category'] && $cashflow['category'] === "pemasukan" ) : ?>
+                        <option value="pemasukan" selected>Pemasukan</option>
+                        <option value="pengeluaran">Pengeluaran</option>
+                        <?php else : ?>
+                            <option value="pemasukan">Pemasukan</option>
+                        <option value="pengeluaran" selected>Pengeluaran</option>
+                    <?php endif ?>
+                </select>
             </div>
 
             <div class="form__field">
-                <label for="anggaran">
-                    <span>Anggaran</span>
+                <label for="amount">
+                    <span>Biaya</span>
                 </label>
-                <input autocomplete="off" id="anggaran" type="text" name="anggaran" value="<?= old('anggaran', $rapb['anggaran']) ?>" class="form__input" placeholder="Masukkan Anggaran" required>
+                <input autocomplete="off" id="amount" type="text" name="amount" value="<?= $cashflow['amount'] ?>" class="form__input" placeholder="Masukkan angka biaya" required>
             </div>
 
             <div class="form__field">
-                <label for="tahun">
-                    <span>Tahun</span>
-                </label>
-                <input autocomplete="off" id="tahun" type="number" min="1912" max="9999" name="tahun" value="<?= old('tahun', $rapb['tahun']) ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
-            </div>
-
-            <div class="form__field">
-                <label for="deskripsi">
+                <label for="information">
                     <span>Deskripsi</span>
                 </label>
-                <textarea id="deskripsi" name="deskripsi" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc(old('deskripsi', $rapb['deskripsi'])) ?></textarea>
+                <textarea id="information" type="text" name="information" class="form__input" rows="15" cols="10" placeholder="Jelaskan maksud dari kegiatan ini" required><?= esc($cashflow['information']) ?></textarea>
+            </div>
+
+            <div class="form__field">
+                <label for="date">
+                    <span>Tanggal</span>
+                </label>
+                <input autocomplete="off" id="date" type="date" name="date" value="<?= $cashflow['date'] ?>" class="form__input" placeholder="Masukkan jenis kategori" required>
             </div>
 
             <div class="form__field">

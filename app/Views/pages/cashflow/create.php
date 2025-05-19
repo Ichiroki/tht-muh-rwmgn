@@ -32,7 +32,7 @@
     <main class="content">
         <form action="<?= site_url('cashflow/create') ?>" method="POST" class="form form-input">
             <?= csrf_field() ?>
-            <div class="form__field">
+            <div class="form__field" style="<?= session('role') === 'admin' ? 'display: block;' : 'display: none;' ?>">
                 <label for="unit_id">
                     <span>Unit</span>
                 </label>

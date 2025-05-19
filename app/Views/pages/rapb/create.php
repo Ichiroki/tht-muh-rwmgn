@@ -38,14 +38,14 @@
                 </label>
                 <input autocomplete="off" id="activity_name" type="text" name="activity_name" value="<?= old('activity_name') ?>" class="form__input" placeholder="Masukkan Nama Kegiatan" required>
             </div>
-            <div class="form__field">
+            <div class="form__field"  style="<?= session('role') === 'admin' ? 'display: block;' : 'display: none;' ?>">
                 <label for="unit_id">
                     <span>Unit</span>
                 </label>
                 <select name="unit_id" id="" class="form__input">
-                    <option value="">PIlih Unit</option>
+                    <option value="">Pilih Unit</option>
                     <?php foreach ($units as $unit) : ?>
-                        <option value=<?= $unit['id'] ?>><?= $unit['unit_name'] ?></option>
+                        <option value="<?= $unit['id'] ?>" <?= session("unit_id") === $unit['id'] ? "selected" : "" ?>><?= $unit['unit_name'] ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -54,7 +54,7 @@
                     <span>Kategori</span>
                 </label>
                 <select name="category" id="" class="form__input">
-                    <option value="">PIlih kategori</option>
+                    <option value="">Pilih kategori</option>
                     <option value="pengeluaran">Pengeluaran</option>
                     <option value="pemasukan">Pemasukan</option>
                 </select>

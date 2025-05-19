@@ -123,21 +123,30 @@ class Cashflow extends BaseController
 
     public function edit($id)
     {
+        $units = new Unit();
+        $rapbs = new RAPB();
+
+        $user = session()->get();
+
         $data['cashflow'] = $this->cashflowModel->find($id);
+        $data['units'] = $units->findAll();
+        $data['rapbs'] = $rapbs->findAll();
         return view('pages/cashflow/edit', $data);
     }
 
     public function update($id)
     {
         $validation = \Config\Services::validation();
-
         $data = $this->request->getPost();
+
+        $amountRaw = $this->request->getPost('amount');
+        $amountBaru = (int) preg_replace('/[^0-9]/', '', $amountRaw);
 
         $validation->setRules([
             'unit_id'     => 'required',
             'rapb_id'     => 'required',
-            'category'    => 'required|in_list[pemasukan, pengeluaran]',
-            'amount'      => 'required|numeric',
+            'category'    => 'required|in_list[pemasukan,pengeluaran]',
+            'amount'      => 'required',
             'information' => 'permit_empty|string',
             'date'        => 'required|valid_date'
         ]);
@@ -146,11 +155,57 @@ class Cashflow extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
+        $cashflowLama = $this->cashflowModel->find($id);
+        if (!$cashflowLama) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        $rapbModel = new \App\Models\RAPB();
+        $rapb = $rapbModel->find($data['rapb_id']);
+
+        if (!$rapb) {
+            return redirect()->back()->with('error', 'RAPB tidak ditemukan.');
+        }
+
+        $amountLama   = (int) $cashflowLama['amount'];
+        $usedAmount   = (int) $rapb['used_amount'];
+        $exactAmount  = (int) $rapb['exact_amount'];
+
+        $kategoriLama = $cashflowLama['category'];
+        $kategoriBaru = $data['category'];
+
+        if ($kategoriLama === 'pengeluaran') {
+            $usedAmount -= $amountLama;
+            $exactAmount += $amountLama;
+        } else {
+            $usedAmount += $amountLama;
+            $exactAmount -= $amountLama;
+        }
+
+        if ($kategoriBaru === 'pengeluaran') {
+            $usedAmount += $amountBaru;
+
+            // Validasi batas
+            if ($usedAmount > $rapb['amount']) {
+                return redirect()->back()->withInput()->with('error', 'Jumlah melebihi anggaran tersedia.');
+            }
+
+            $exactAmount -= $amountBaru;
+        } else {
+            $usedAmount -= $amountBaru;
+            $exactAmount += $amountBaru;
+        }
+
+        $rapbModel->update($data['rapb_id'], [
+            'used_amount'   => $usedAmount,
+            'exact_amount'  => $exactAmount
+        ]);
+
         $this->cashflowModel->update($id, [
             'unit_id'     => $data['unit_id'],
             'rapb_id'     => $data['rapb_id'],
-            'category'    => $data['category'],
-            'amount'      => $data['amount'],
+            'category'    => $kategoriBaru,
+            'amount'      => $amountBaru,
             'information' => $data['information'],
             'date'        => $data['date'],
         ]);
@@ -158,26 +213,38 @@ class Cashflow extends BaseController
         return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil diperbarui!');
     }
 
+
     public function delete($id)
     {
         $cashflow = $this->cashflowModel->find($id);
         $rapbModel = new \App\Models\Rapb();
         $rapb = $rapbModel->find($cashflow['rapb_id']);
     
-        if ($cashflow['category'] === 'pengeluaran') {
-            $rapb['used_amount'] -= $cashflow['amount'];
-            $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];
-    
-        } elseif ($cashflow['category'] === 'pemasukan') {
-            $rapb['amount'] -= $cashflow['amount'];
-            $rapb['used_amount'] -= $cashflow['amount'];
-            $rapb['exact_amount'] = $rapb['amount'] - $rapb['used_amount'];
+        if (!$cashflow || !$rapb) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
         }
     
-        $rapbModel->save($rapb);
+        $usedAmount = (int) $rapb['used_amount'];
+        $exactAmount = (int) $rapb['exact_amount'];
+        $amount = (int) $cashflow['amount'];
+    
+        if ($cashflow['category'] === 'pengeluaran') {
+            $usedAmount -= $amount;
+            $exactAmount += $amount;
+        } elseif ($cashflow['category'] === 'pemasukan') {
+            $usedAmount += $amount;
+            $exactAmount -= $amount;
+        }
+    
+        $rapbModel->update($cashflow['rapb_id'], [
+            'used_amount' => $usedAmount,
+            'exact_amount' => $exactAmount,
+        ]);
+    
         $this->cashflowModel->delete($id);
     
         return redirect()->to('/cashflow')->with('success', 'Transaksi berhasil dihapus!');
     }
+    
     
 }
